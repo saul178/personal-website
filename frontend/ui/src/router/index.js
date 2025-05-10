@@ -1,3 +1,4 @@
+import Contact from '@/views/Contact.vue'
 import Home from '@/views/Home.vue'
 import Personal from '@/views/Personal.vue'
 import Projects from '@/views/Projects.vue'
@@ -9,7 +10,7 @@ const router = createRouter({
     { path: '/', name: 'Home', component: Home },
     { path: '/projects', name: 'Projects', component: Projects },
     { path: '/personal', name: 'Personal', component: Personal },
-
+    { path: '/contact', name: 'Contact', component: Contact },
   ],
 })
 
