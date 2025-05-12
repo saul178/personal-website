@@ -6,37 +6,47 @@
         <RouterLink to="/" class="py-5 px-2 text-white flex-1 font-bold">
           ICON-HERE
         </RouterLink>
-        <div class="md:hidden flex items-center">
-          <button @click="toggleMobileMenu" class="md:hidden mobile-menu-button">
+
+        <!-- burger icon into X icon -->
+        <button @click="toggleMobileMenu" class="md:hidden mobile-menu-button">
+          <span v-if="!isMobileMenuOpen">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
-          </button>
-        </div>
-        <!-- links -->
-        <div :class="['flex flex-col md:flex-row md:space-x-1 pb-3 md:pb-0 w-full md:w-auto', isMobileMenuOpen ?
-          'block' : 'hidden', 'md:flex']" class="navigation-menu px-4">
-          <RouterLink to="/" class="py-2 px-3 block hover:text-blue-400 transition-colors" active-class="text-blue-400"
-            exact>
-            Home
-          </RouterLink>
+          </span>
 
-          <RouterLink to="/projects" class="py-2 px-3 block hover:text-blue-400 transition-colors"
-            active-class="text-blue-400">
-            Projects
-          </RouterLink>
+          <span v-else>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </span>
+        </button>
+      </div>
 
-          <RouterLink to="/contact" class="py-2 px-3 block hover:text-blue-400 transition-colors"
-            active-class="text-blue-400">
-            Contact
-          </RouterLink>
+      <!-- links -->
+      <div :class="['flex flex-col md:flex-row md:space-x-1 pb-3 md:pb-0 w-full md:w-auto', isMobileMenuOpen ?
+        'block' : 'hidden', 'md:flex']" class="navigation-menu px-4">
+        <RouterLink to="/" class="py-2 px-3 block hover:text-blue-400 transition-colors" active-class="text-blue-400"
+          exact>
+          Home
+        </RouterLink>
 
-          <RouterLink to="/personal" class="py-2 px-3 block hover:text-blue-400 transition-colors"
-            active-class="text-blue-400">
-            Personal
-          </RouterLink>
-        </div>
+        <RouterLink to="/projects" class="py-2 px-3 block hover:text-blue-400 transition-colors"
+          active-class="text-blue-400">
+          Projects
+        </RouterLink>
+
+        <RouterLink to="/contact" class="py-2 px-3 block hover:text-blue-400 transition-colors"
+          active-class="text-blue-400">
+          Contact
+        </RouterLink>
+
+        <RouterLink to="/personal" class="py-2 px-3 block hover:text-blue-400 transition-colors"
+          active-class="text-blue-400">
+          Personal
+        </RouterLink>
       </div>
     </div>
   </nav>
