@@ -1,4 +1,71 @@
 @import 'tailwindcss';
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
+
+@theme {
+  --color-royal-blue-default: #072460;
+  --color-royal-blue-100: #010713;
+  --color-royal-blue-200: #030f26;
+  --color-royal-blue-300: #041639;
+  --color-royal-blue-400: #061d4c;
+  --color-royal-blue-500: #072460;
+  --color-royal-blue-600: #0d41ab;
+  --color-royal-blue-700: #1b62ee;
+  --color-royal-blue-800: #6796f4;
+  --color-royal-blue-900: #b3cbf9;
+
+  --color-polynesian-blue-default: #224891;
+  --color-polynesian-blue-100: #070f1d;
+  --color-polynesian-blue-200: #0e1d3a;
+  --color-polynesian-blue-300: #142c57;
+  --color-polynesian-blue-400: #1b3a74;
+  --color-polynesian-blue-500: #224891;
+  --color-polynesian-blue-600: #2f64c6;
+  --color-polynesian-blue-700: #5e89d9;
+  --color-polynesian-blue-800: #94b0e6;
+  --color-polynesian-blue-900: #c9d8f2;
+
+  --color-celtic-blue-default: #4c75b6;
+  --color-celtic-blue-100: #0f1725;
+  --color-celtic-blue-200: #1e2f4a;
+  --color-celtic-blue-300: #2d466f;
+  --color-celtic-blue-400: #3c5e94;
+  --color-celtic-blue-500: #4c75b6;
+  --color-celtic-blue-600: #7191c5;
+  --color-celtic-blue-700: #95add4;
+  --color-celtic-blue-800: #b8c8e2;
+  --color-celtic-blue-900: #dce4f1;
+
+  --color-satin-sheen-gold-default: #b89a51;
+  --color-satin-sheen-gold-100: #0f1725;
+  --color-satin-sheen-gold-200: #4b3f1f;
+  --color-satin-sheen-gold-300: #715e2e;
+  --color-satin-sheen-gold-400: #977d3e;
+  --color-satin-sheen-gold-500: #b89a51;
+  --color-satin-sheen-gold-600: #c6af74;
+  --color-satin-sheen-gold-700: #d4c397;
+  --color-satin-sheen-gold-800: #e3d7b9;
+  --color-satin-sheen-gold-900: #f1ebdc;
+
+  --color-powder-blue-default: #a7caf2;
+  --color-powder-blue-100: #0b2747;
+  --color-powder-blue-200: #154e8e;
+  --color-powder-blue-300: #2074d5;
+  --color-powder-blue-400: #5f9fe7;
+  --color-powder-blue-500: #a7caf2;
+  --color-powder-blue-600: #b8d4f4;
+  --color-powder-blue-700: #cadff7;
+  --color-powder-blue-800: #dceafa;
+  --color-powder-blue-900: #edf4fc;
+
+  --color-alice-blue-default: #e7f0f6;
+  --color-alice-blue-100: #1a3446;
+  --color-alice-blue-200: #35698b;
+  --color-alice-blue-300: #5e9ac2;
+  --color-alice-blue-400: #a3c5dc;
+  --color-alice-blue-500: #e7f0f6;
+  --color-alice-blue-600: #edf4f8;
+  --color-alice-blue-700: #f2f7fa;
+  --color-alice-blue-800: #f6f9fc;
+  --color-alice-blue-900: #fbfcfd;
+
+}
