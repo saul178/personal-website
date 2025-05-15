@@ -1,7 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
 @import 'tailwindcss';
 @tailwind utilities;
 
 @theme {
+  --font-rubik: "Rubik", sans-serif;
+
+  --color-background: var(--main);
+  --color-forground: var(--alt);
+  --color-accent: var(--highlight);
+  --color-primary: var(--text);
+  --color-disable: var(--muted);
+
   --color-royal-blue-default: #072460;
   --color-royal-blue-100: #010713;
   --color-royal-blue-200: #030f26;
@@ -67,5 +77,21 @@
   --color-alice-blue-700: #f2f7fa;
   --color-alice-blue-800: #f6f9fc;
   --color-alice-blue-900: #fbfcfd;
+}
 
+/* light mode and dark mode themes */
+:root {
+  --main: #b3cbf9;
+  --alt: #c9d8f2;
+  --highlight: #5f9fe7;
+  --text: #010713;
+  --muted: #7b7b7b;
+}
+
+.dark {
+  --main: #010713;
+  --alt: #070f1d;
+  --highlight: #5f9fe7;
+  --text: #e7f0f6;
+  --muted: #7b7b7b;
 }

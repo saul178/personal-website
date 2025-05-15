@@ -1,9 +1,9 @@
 <template>
-  <nav class="bg-royal-blue-400 text-alice-blue-500 shadow-lg">
-    <div class="container mx-auto px-4 md:flex items-center gap-6">
+  <nav class="bg-polynesian-blue-900 text-royal-blue-100 shadow-lg">
+    <div class="container mx-auto px-4 md:flex items-center justify-between gap-6">
       <!-- Logo -->
       <div class="flex items-center justify-between md:w-auto w-full">
-        <RouterLink to="/" class="py-5 px-2 text-alice-blue-500 flex-1 font-bold">
+        <RouterLink to="/" class="py-5 px-2 flex-1 font-bold">
           ICON-HERE
         </RouterLink>
         <!-- burger icon into X icon -->
@@ -61,4 +61,4 @@ const toggleMobileMenu = () => {
 }
 </script>
 
-<style></style>
+<style scoped></style>
