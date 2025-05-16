@@ -47,6 +47,14 @@
           Personal
         </RouterLink>
       </div>
+      <div>
+        <span class="dark:primary-text">
+          {{ isDark ? "Dark" : "Light" }} Mode
+        </span>
+        <button @click="toggleDark()" class="py-2 px-4 bg-background primary-text">
+
+        </button>
+      </div>
     </div>
   </nav>
 </template>
@@ -54,11 +62,16 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router'
+import { useDark, useToggle } from '@vueuse/core'
+
 const isMobileMenuOpen = ref(false)
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
+
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 </script>
 
 <style scoped></style>
