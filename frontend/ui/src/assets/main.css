@@ -7,7 +7,7 @@
   --font-rubik: "Rubik", sans-serif;
 
   --color-background: var(--main);
-  --color-forground: var(--alt);
+  --color-foreground: var(--alt);
   --color-accent: var(--highlight);
   --color-primary: var(--text);
   --color-disable: var(--muted);
