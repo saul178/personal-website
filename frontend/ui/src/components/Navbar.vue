@@ -1,11 +1,13 @@
 <template>
   <nav class="dark:bg-foreground dark:text-primary shadow-lg">
     <div class="container mx-auto px-4 md:flex items-center justify-between gap-6">
+
       <!-- Logo -->
       <div class="flex items-center justify-between md:w-auto w-full">
         <RouterLink to="/" class="py-5 px-2 flex-1 font-bold">
           ICON-HERE
         </RouterLink>
+
         <!-- burger icon into X icon -->
         <button @click="toggleMobileMenu" class="md:hidden cursor-pointer mobile-menu-button">
           <span v-if="!isMobileMenuOpen">
@@ -47,10 +49,8 @@
           Personal
         </RouterLink>
       </div>
+      <!-- dark and light mode icon -->
       <div>
-        <span class="dark:primary-text">
-          {{ isDark ? "Dark" : "Light" }} Mode
-        </span>
         <button @click="toggleDark()" class="py-2 px-3 dark:hover:text-accent transition-colors">
           <span v-if="isDark">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -66,7 +66,6 @@
                 d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
             </svg>
           </span>
-
         </button>
       </div>
     </div>
