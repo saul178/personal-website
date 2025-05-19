@@ -2,7 +2,7 @@
   <nav class="dark:bg-foreground dark:text-primary shadow-lg">
     <div class="container mx-auto px-4 md:flex items-center justify-between gap-6">
 
-      <!-- Logo -->
+      <!--TODO: This logo -->
       <div class="flex items-center justify-center md:w-auto w-full">
         <RouterLink to="/" class="py-5 px-2 flex-1 font-bold">
           ICON-HERE
@@ -28,53 +28,17 @@
 
       <!-- Desktop view links -->
       <div class="hidden md:flex items-center space-x-4">
-        <RouterLink to="/" class="py-2 px-3 block dark:hover:text-accent transition-colors"
-          active-class="dark:text-accent" exact>
-          Home
-        </RouterLink>
-
-        <RouterLink to="/projects" class="py-2 px-3 block dark:hover:text-accent transition-colors"
-          active-class="dark:text-accent" exact>
-          Projects
-        </RouterLink>
-
-        <RouterLink to="/contact" class="py-2 px-3 block dark:hover:text-accent transition-colors"
-          active-class="dark:text-accent" exact>
-          Contact
-        </RouterLink>
-
-        <RouterLink to="/personal" class="py-2 px-3 block dark:hover:text-accent transition-colors"
-          active-class="dark:text-accent" exact>
-          Personal
-        </RouterLink>
+        <NavLinks />
       </div>
       <div class="hidden md:flex">
         <ThemeToggle />
       </div>
     </div>
 
-    <!-- mobile stuff need to make it dry -->
+    <!-- mobile nav links -->
     <div v-if="isMobileMenuOpen" class="md:hidden flex flex-col px-4 pb-4 space-y-2
       dark:bg-foreground">
-      <RouterLink to="/" class="py-2 px-3 block dark:hover:text-accent transition-colors"
-        active-class="dark:text-accent" exact>
-        Home
-      </RouterLink>
-
-      <RouterLink to="/projects" class="py-2 px-3 block dark:hover:text-accent transition-colors"
-        active-class="dark:text-accent" exact>
-        Projects
-      </RouterLink>
-
-      <RouterLink to="/contact" class="py-2 px-3 block dark:hover:text-accent transition-colors"
-        active-class="dark:text-accent" exact>
-        Contact
-      </RouterLink>
-
-      <RouterLink to="/personal" class="py-2 px-3 block dark:hover:text-accent transition-colors"
-        active-class="dark:text-accent" exact>
-        Personal
-      </RouterLink>
+        <NavLinks />
         <ThemeToggle mobile="true" />
     </div>
   </nav>
@@ -82,8 +46,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router'
-import ThemeToggle from './ThemeToggle.vue';
+import ThemeToggle from './ThemeToggle.vue'
+import NavLinks from './NavLinks.vue'
 
 const isMobileMenuOpen = ref(false)
 
@@ -92,5 +56,3 @@ const toggleMobileMenu = () => {
 }
 
 </script>
-
-<style scoped></style>

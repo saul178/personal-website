@@ -19,14 +19,6 @@
 
 <script setup>
 import { useDark, useToggle } from '@vueuse/core'
-import { computed } from 'vue'
-
-const props = defineProps({
-  mobile: {
-    type: Boolean, 
-    default: false
-  }
-})
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
