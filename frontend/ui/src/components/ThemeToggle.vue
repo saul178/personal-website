@@ -1,3 +1,10 @@
+<script setup>
+import { useDark, useToggle } from '@vueuse/core'
+
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
+</script>
+
 <template>
   <button @click="toggleDark()" class="py-2 px-3 dark:hover:text-accent hover:text-accent transition-colors">
     <span v-if="isDark">
@@ -17,9 +24,3 @@
   </button>
 </template>
 
-<script setup>
-import { useDark, useToggle } from '@vueuse/core'
-
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
-</script>

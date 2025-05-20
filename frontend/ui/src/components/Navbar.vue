@@ -1,3 +1,15 @@
+<script setup>
+import { ref } from 'vue';
+import ThemeToggle from './ThemeToggle.vue'
+import NavLinks from './NavLinks.vue'
+
+const isMobileMenuOpen = ref(false)
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+</script>
+
 <template>
   <nav class="dark:bg-foreground dark:text-primary shadow-lg">
     <div class="container mx-auto px-4 md:flex items-center justify-between gap-6">
@@ -16,7 +28,6 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
           </span>
-
           <span v-else>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
@@ -43,16 +54,3 @@
     </div>
   </nav>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-import ThemeToggle from './ThemeToggle.vue'
-import NavLinks from './NavLinks.vue'
-
-const isMobileMenuOpen = ref(false)
-
-const toggleMobileMenu = () => {
-  isMobileMenuOpen.value = !isMobileMenuOpen.value
-}
-
-</script>

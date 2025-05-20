@@ -7,6 +7,7 @@
 - [ ] begin the Contact page
 - [ ] begin the Personal page
 
+- [ ] look into transitions with vue (https://youtu.be/L77Uq93XXzk)
 - [ ] fix the alignment with the icon label -> low priority
 - [ ] start the backend -> low priority
 - [ ] look into the github api for the projects page -> low priority
