@@ -1,41 +1,37 @@
 <script setup>
-// no script yet
+
 </script>
 
 <template>
   <!-- Container for both cards -->
-  <div class="px-6 py-12 flex flex-col md:flex-row gap-16 justify-center">
+  <div class="px-6 py-12 flex flex-col md:flex-row space-x-32 space-y-16 justify-center">
 
     <!-- Profile Card -->
-    <div class="bg-muted dark:bg-foreground rounded-2xl shadow-lg p-6 w-full max-w-sm text-center">
-      <img src="../assets/images/Default_pfp.svg" alt="Profile Picture"
-        class="w-32 h-32 rounded-full mx-auto shadow-md" />
+    <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full max-w-2xl text-center">
+      <img src="../assets/images/me.jpeg" alt="Profile Picture" class="w-52 h-52 rounded-full
+        mx-auto shadow-xl" />
       <div class="mt-6">
         <h1 class="text-2xl font-bold dark:text-primary">About Me</h1>
-        <p class="mt-2 dark:text-primary">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-          sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
-          nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-          aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam
-          dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
-          vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem
-          ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque
-          rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
-          Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing
-          sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et
-          ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci
-          eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed
-          consequat, leo eget bibendum sodales, augue velit cursus nunc,
+        <p class="mt-2 dark:text-primary text-left">
+          At a young age I have always loved messing with computers and being the families in house IT person. In my
+          journey to complete my Computer Science degree, I rediscovered a passion that I lost through time. I fell in
+          love with building computers, programming slowly became a new passion, and I fell in love with Linux. I always
+          strive to break my skill cap by learning from others or challenging myself to learn new things.
+
+          I have worked in retail for years, while I appreciate and value all the skills that I have learned from my
+          job. I always knew that I could do more for myself and strive for higher levels. The completion of my degree
+          is proof that I can do anything I set my mind to and I plan to reach higher levels through out my journey in
+          life.
         </p>
       </div>
     </div>
 
     <!-- Resume Card -->
-    <div class="bg-muted dark:bg-foreground rounded-2xl shadow-lg p-6 w-full max-w-xl text-center">
+    <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full max-w-2xl text-center">
       <!-- This will hold resume info later -->
       <h1 class="text-2xl font-bold dark:text-primary">Resume</h1>
       <p class="mt-2 dark:text-primary">
-        Coming soon...
+        Dummy data for now.
       </p>
     </div>
   </div>
