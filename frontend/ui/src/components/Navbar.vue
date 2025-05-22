@@ -49,8 +49,8 @@ const toggleMobileMenu = () => {
     <!-- mobile nav links -->
     <div v-if="isMobileMenuOpen" class="md:hidden flex flex-col px-4 pb-4 space-y-2
       dark:bg-foreground">
-        <NavLinks />
-        <ThemeToggle mobile="true" />
+      <NavLinks />
+      <ThemeToggle mobile="true" />
     </div>
   </nav>
 </template>
