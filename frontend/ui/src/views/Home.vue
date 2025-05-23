@@ -28,21 +28,81 @@
 
     <!-- Resume Card -->
     <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full max-w-2xl text-center">
-      <h1 class="text-2xl font-bold dark:text-primary border-b border-b-satin-sheen-gold-600">My Skills</h1>
+      <h1 class="text-2xl font-bold dark:text-primary">My Skills</h1>
       <!-- golang backend will fill up this information with a metadata json file -->
-      <h1 class="text-lg mt-4 dark:text-primary"> Expert with these OS's </h1>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-3">
-        <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
-          <font-awesome-icon :icon="['fab', 'linux']" class="dark:text-primary text-5xl" alt="Linux" />
-          <span class="dark:text-primary block mt-1"> Linux </span>
+      <!-- OS Grid -->
+      <h1 class="text-lg font-medium mt-4 dark:text-primary"> Proficient with these OS's </h1>
+      <div class="flex items-start gap-4 mt-3">
+        <div class="hidden md:flex flex-col items-center pt-8 px-3">
+          <font-awesome-icon :icon="['fas', 'desktop']" class="dark:text-primary text-4xl mb-2" />
         </div>
-        <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
-          <font-awesome-icon :icon="['fab', 'windows']" class="dark:text-primary text-5xl" alt="Windows" />
-          <span class="dark:text-primary block mt-1"> Windows </span>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'linux']" class="dark:text-primary text-5xl" />
+            <span class="dark:text-primary block mt-1">Linux</span>
+          </div>
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'windows']" class="dark:text-primary text-5xl" alt="Windows" />
+            <span class="dark:text-primary block mt-1"> Windows </span>
+          </div>
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'apple']" class="dark:text-primary text-5xl" alt="Apple" />
+            <span class="dark:text-primary block mt-1"> Apple </span>
+          </div>
         </div>
-        <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
-          <font-awesome-icon :icon="['fab', 'apple']" class="dark:text-primary text-5xl" alt="Apple" />
-          <span class="dark:text-primary block mt-1"> Apple </span>
+      </div>
+
+      <!-- language grid -->
+      <h1 class="text-lg font-medium mt-4 pt-2 dark:text-primary"> Proficient in these languages </h1>
+      <div class="flex items-start gap-4 mt-3">
+        <div class="hidden md:flex flex-col items-center pt-12 px-3">
+          <font-awesome-icon :icon="['fas', 'code']"
+            class="dark:text-primary text-4xl drop-shadow-[0_0_3px_rgba(255,215,0,0.8)]" alt="Code" />
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 w-full">
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'golang']" class="dark:text-primary text-5xl" alt="Golang" />
+            <span class="dark:text-primary block mt-1"> Golang </span>
+          </div>
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'python']" class="dark:text-primary text-5xl" alt="Python" />
+            <span class="dark:text-primary block mt-1"> Python </span>
+          </div>
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'java']" class="dark:text-primary text-5xl" alt="Java" />
+            <span class="dark:text-primary block mt-1"> Java </span>
+          </div>
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'js']" class="dark:text-primary text-5xl" alt="JavaScript" />
+            <span class="dark:text-primary block mt-1"> JavaScript </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- tools and frameworks -->
+      <h1 class="text-lg font-medium mt-4 pt-2 dark:text-primary"> Proficient with these tools and frameworks </h1>
+      <div class="flex items-start gap-4 mt-3">
+        <div class="hidden md:flex flex-col items-center pt-12 px-3">
+          <font-awesome-icon :icon="['fas', 'screwdriver-wrench']" class="dark:text-primary
+            text-4xl" alt="Tools" />
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 w-full">
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'vuejs']" class="dark:text-primary text-5xl" alt="Vuejs" />
+            <span class="dark:text-primary block mt-1"> Vuejs </span>
+          </div>
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'docker']" class="dark:text-primary text-5xl" alt="docker" />
+            <span class="dark:text-primary block mt-1"> Docker </span>
+          </div>
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'git-alt']" class="dark:text-primary text-5xl" alt="Git" />
+            <span class="dark:text-primary block mt-1"> Git </span>
+          </div>
+          <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+            <font-awesome-icon :icon="['fab', 'github']" class="dark:text-primary text-5xl" alt="Github" />
+            <span class="dark:text-primary block mt-1"> Github </span>
+          </div>
         </div>
       </div>
     </div>
