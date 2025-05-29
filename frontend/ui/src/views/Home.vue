@@ -30,16 +30,27 @@
         </div>
       </div>
 
-      <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full max-w-2xl text-center">
-        <h1 class="dark:text-primary"> maybe education here? </h1>
+      <!-- TODO: move this to the center -->
+      <div class="flex justify-center">
+        <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full md:w-1/3 text-center">
+          <h1 class="text-lg font-bold dark:text-primary mb-4">Contact me!</h1>
+          <div class="flex justify-center space-x-4">
+            <a href="https://www.linkedin.com/in/saul0178">
+              <font-awesome-icon :icon="['fab', 'linkedin']" class="text-4xl dark:text-primary" />
+            </a>
+            <a href="https://github.com/saul178">
+              <font-awesome-icon :icon="['fab', 'github']" class="text-4xl dark:text-primary" />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Resume Card -->
     <!-- golang backend will fill up this information with a metadata json file -->
     <!-- OS Grid -->
     <div class="flex flex-col space-y-6 w-full max-w-2xl">
       <h1 class="text-2xl font-bold dark:text-primary text-center">My Skills</h1>
+      <!-- Resume Cards -->
       <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full max-w-2xl text-center">
         <h1 class="text-lg font-medium dark:text-primary"> Proficient with these OS's </h1>
         <div class="flex items-start gap-4 mt-3">
