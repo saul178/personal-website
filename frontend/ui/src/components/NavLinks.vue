@@ -4,7 +4,6 @@ import { RouterLink } from 'vue-router'
 const items = [
   { to: '/', label: 'Home' },
   { to: '/projects', label: 'Projects' },
-  { to: '/contact', label: 'Contact' },
   { to: '/personal', label: 'Personal' },
 ]
 </script>

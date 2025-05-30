@@ -21,7 +21,8 @@
             love with building computers, programming slowly became a new passion, and I fell in love with Linux. I
             always
             strive to break my skill cap by learning from others or challenging myself to learn new things.
-
+            <br>
+            <br>
             I have worked in retail for years, while I appreciate and value all the skills that I have learned from my
             job. I always knew that I could do more for myself and strive for higher levels. The completion of my degree
             is proof that I can do anything I set my mind to and I plan to reach higher levels through out my journey in
@@ -31,12 +32,13 @@
       </div>
 
       <!-- TODO: move this to the center -->
-      <div class="flex justify-center">
+      <div class="flex justify-center items-center">
         <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full md:w-1/3 text-center">
           <h1 class="text-lg font-bold dark:text-primary mb-4">Contact me!</h1>
           <div class="flex justify-center space-x-4">
             <a href="https://www.linkedin.com/in/saul0178">
-              <font-awesome-icon :icon="['fab', 'linkedin']" class="text-4xl dark:text-primary" />
+              <font-awesome-icon :icon="['fab', 'linkedin']" class="text-4xl dark:text-primary
+                hover:drop-shadow-[0_0_2px_rgba(255,215,0,0.8)]" />
             </a>
             <a href="https://github.com/saul178">
               <font-awesome-icon :icon="['fab', 'github']" class="text-4xl dark:text-primary" />
