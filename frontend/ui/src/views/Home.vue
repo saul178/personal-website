@@ -19,8 +19,7 @@
             being the families in house IT person. In my
             journey to complete my Computer Science degree, I rediscovered a passion that I lost through time. I fell in
             love with building computers, programming slowly became a new passion, and I fell in love with Linux. I
-            always
-            strive to break my skill cap by learning from others or challenging myself to learn new things.
+            always strive to break my skill cap by learning from others or challenging myself to learn new things.
             <br>
             <br>
             I have worked in retail for years, while I appreciate and value all the skills that I have learned from my
