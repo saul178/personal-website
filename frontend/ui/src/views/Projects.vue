@@ -25,10 +25,25 @@ at the top or bottom have total commits?
     <div class="flex-1 space-y-6">
       <!-- Project Card 1 -->
       <div class="bg-foreground p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold dark:text-primary">Project Title Here</h3>
-        <p class="mt-2 text-gray-300">
-          Description of your project, tech stack used, features, etc.
-        </p>
+        <div>
+          <h3 class="text-xl font-semibold dark:text-primary">Project Title Here</h3>
+        </div>
+        <div>
+          <p class="mt-2 text-gray-300"> <!-- this need to change for lightmode -->
+            She's asked the question so many times that she barely listened to the answers anymore. The answers were
+            always the same. Well, not exactly the same, but the same in a general sense. A more accurate description
+            was the answers never surprised her. So, she asked for the 10,000th time, "What's your favorite animal?" But
+            this time was different. When she heard the young boy's answer, she wondered if she had heard him correctly.
+          </p>
+        </div>
+        <!-- tag rows -->
+        <div class="flex flex-row flex-wrap gap-4 mt-4">
+          <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent">Tag
+            1</span>
+          <div class="inline-block px-2 py-1 rounded-full text-sm dark:text-primary border
+            border-accent w-fit">Tag 2</div>
+          <div>tag1</div>
+        </div>
       </div>
 
       <!-- Project Card 2 -->
