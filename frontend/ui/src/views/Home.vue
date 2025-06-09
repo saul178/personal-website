@@ -84,7 +84,7 @@
               <font-awesome-icon :icon="['fas', 'code']"
                 class="dark:text-primary text-4xl drop-shadow-[0_0_3px_rgba(255,215,0,0.8)]" alt="Code" />
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 w-full">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 w-full">
               <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
                 <font-awesome-icon :icon="['fab', 'golang']" class="dark:text-primary text-5xl" alt="Golang" />
                 <span class="dark:text-primary block mt-1"> Golang </span>
@@ -100,6 +100,10 @@
               <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
                 <font-awesome-icon :icon="['fab', 'js']" class="dark:text-primary text-5xl" alt="JavaScript" />
                 <span class="dark:text-primary block mt-1"> JavaScript </span>
+              </div>
+              <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+                <font-awesome-icon :icon="['fab', 'html5']" class="dark:text-primary text-5xl" alt="HTML" />
+                <span class="dark:text-primary block mt-1">HTML</span>
               </div>
             </div>
           </div>
@@ -143,7 +147,7 @@
             <div class="hidden md:flex flex-col items-center pt-12 px-3">
               <font-awesome-icon :icon="['fas', 'layer-group']" class="dark:text-primary text-4xl" alt="Frameworks" />
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 w-full">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 w-full">
               <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
                 <font-awesome-icon :icon="['fab', 'vuejs']" class="dark:text-primary text-5xl" alt="Vuejs" />
                 <span class="dark:text-primary block mt-1"> Vue.js </span>
@@ -179,6 +183,10 @@
                   </g>
                 </svg>
                 <span class="dark:text-primary block mt-1"> Django </span>
+              </div>
+              <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
+                <font-awesome-icon :icon="['fab', 'bootstrap']" class="dark:text-primary text-5xl" />
+                <span class="dark:text-primary block mt-1">Bootstrap</span>
               </div>
             </div>
           </div>

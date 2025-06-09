@@ -10,6 +10,8 @@
   --color-foreground: var(--alt);
   --color-accent: var(--highlight);
   --color-primary: var(--text);
+  --color-secondary: var(--text-alt);
+  --color-accent-secondary: var(--highlight-alt);
   --color-disable: var(--muted);
 
   --color-royal-blue-default: #072460;
@@ -84,7 +86,9 @@
   --main: #b3cbf9;
   --alt: #c9d8f2;
   --highlight: #5f9fe7;
+  --highlight-alt: #d4c397;
   --text: #010713;
+  --text-alt: #041639;
   --muted: #7b7b7b;
 }
 
@@ -92,6 +96,8 @@
   --main: #010713;
   --alt: #070f1d;
   --highlight: #5f9fe7;
+  --highlight-alt: #b89a51;
   --text: #e7f0f6;
+  --text-alt: #edf4f8;
   --muted: #7b7b7b;
 }

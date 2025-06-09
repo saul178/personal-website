@@ -24,37 +24,50 @@ at the top or bottom have total commits?
     <!-- Right Content Area -->
     <div class="flex-1 space-y-6">
       <!-- Project Card 1 -->
-      <div class="bg-foreground p-6 rounded-lg shadow-md">
+      <div class="group hover:-translate-y-1 bg-foreground backdrop-blur-sm p-6 rounded-2xl border
+        border-accent/20 transition-all duration-300 shadow-lg hover:shadow-accent/20">
         <div>
           <h3 class="text-xl font-semibold dark:text-primary">Project Title Here</h3>
         </div>
         <div>
-          <p class="mt-2 text-gray-300"> <!-- this need to change for lightmode -->
-            She's asked the question so many times that she barely listened to the answers anymore. The answers were
+          <p class="mt-2 dark:text-secondary"> <!-- this need to change for lightmode -->
+            PROJECT DESCRIPTION HERE She's asked the question so many times that she barely listened to the answers
+            anymore. The answers were
             always the same. Well, not exactly the same, but the same in a general sense. A more accurate description
             was the answers never surprised her. So, she asked for the 10,000th time, "What's your favorite animal?" But
             this time was different. When she heard the young boy's answer, she wondered if she had heard him correctly.
           </p>
         </div>
-        <!-- tag rows -->
+        <!-- tag rows (this will probably be a vue component) -->
         <div class="flex flex-row flex-wrap gap-4 mt-4">
-          <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent">Tag
-            1</span>
-          <div class="inline-block px-2 py-1 rounded-full text-sm dark:text-primary border
-            border-accent w-fit">Tag 2</div>
-          <div>tag1</div>
+          <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent">Tag 1</span>
+          <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent">Tag 2</span>
+          <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent">Tag 3</span>
+        </div>
+
+        <div class="md:flex flex-row hidden mt-6 border-t-2 border-royal-blue-100">
+          <h3 class="dark:text-secondary font-semibold mt-2">Commit History Example</h3>
+        </div>
+        <div class="flex flex-row w-full mt-4">
+          <img class="w-full" src="https://ghchart.rshah.org/saul178" alt="Github Contributations Chart">
         </div>
       </div>
 
       <!-- Project Card 2 -->
-      <div class="bg-foreground p-6 rounded-lg shadow-md">
+      <div class="group hover:-translate-y-1 bg-foreground backdrop-blur-sm p-6 rounded-2xl border
+        border-accent/20 transition-all duration-300 shadow-lg hover:shadow-accent/20">
         <h3 class="text-xl font-semibold dark:text-primary">Another Project</h3>
-        <p class="mt-2 text-gray-300">
+        <p class="mt-2 dark:text-disable">
           Another description here.
         </p>
+
+        <div class="flex flex-row flex-wrap gap-4 mt-4">
+          <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent">Tag 1</span>
+          <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent">Tag 2</span>
+          <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent">Tag 3</span>
+        </div>
       </div>
 
-      <!-- Add more cards as needed -->
     </div>
   </div>
 
