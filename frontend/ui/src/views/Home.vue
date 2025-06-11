@@ -34,7 +34,7 @@
       <div class="flex justify-center items-center">
         <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full md:w-1/3 text-center">
           <h1 class="text-lg font-bold dark:text-primary mb-4">Contact me!</h1>
-          <div class="flex justify-center space-x-4">
+          <div class="flex justify-center gap-4">
             <a href="https://www.linkedin.com/in/saul0178">
               <font-awesome-icon :icon="['fab', 'linkedin']" class="text-4xl dark:text-primary
                 hover:drop-shadow-[0_0_2px_rgba(255,215,0,0.8)]" />
