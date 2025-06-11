@@ -11,7 +11,7 @@ at the top or bottom have total commits?
 -->
 
 <template>
-  <div class="flex px-8 py-12 gap-8">
+  <div class="flex flex-col md:flex-row px-8 py-12 gap-8">
     <!-- Left Sidebar -->
     <div class="w-1/4 flex flex-col space-y-4">
       <h2 class="text-4xl font-bold dark:text-primary">Projects</h2>
@@ -22,16 +22,17 @@ at the top or bottom have total commits?
     </div>
 
     <!-- Right Content Area -->
-    <div class="flex-1 space-y-6">
+    <div class="md:flex-1 flex-col space-y-6">
       <!-- Project Card 1 -->
-      <div class="flex group hover:-translate-y-1 bg-foreground backdrop-blur-sm p-6 rounded-2xl border
+      <div class="flex group hover:-translate-y-1 bg-foreground hover:bg-foreground/60 backdrop-blur-sm p-6 rounded-2xl border
         border-accent/20 transition-all duration-300 shadow-lg hover:shadow-accent/20">
-        <img class="h-48 w-80 mr-4 rounded-md shadow-lg object-cover"
+        <img class="h-48 w-80 mr-4 rounded-md shadow-lg object-cover "
           src="../assets/images/snapshot_2025-06-10_13-49-07.png" alt="Project 1">
 
         <div class="flex flex-col justify-between">
           <div>
-            <h3 class="text-xl font-semibold dark:text-primary">Project Title Here</h3>
+            <h3 class="text-xl font-semibold dark:text-primary">Project Title Here Should be a link
+              to project</h3>
             <div>
               <p class="mt-2 dark:text-secondary"> <!-- this need to change for lightmode -->
                 PROJECT DESCRIPTION HERE She's asked the question so many times that she barely listened to the answers
@@ -126,7 +127,7 @@ at the top or bottom have total commits?
     </div>
   </div>
 
-  <div class="flex px-8 py-12 gap-8">
+  <div class="flex md:flex-row flex-col px-8 py-12 gap-8">
     <div class="w-1/4 flex flex-col space-y-4">
       <h1 class="dark:text-primary font-bold text-3xl">My Github Activity</h1>
     </div>
