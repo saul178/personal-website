@@ -52,15 +52,23 @@
     <div class="flex flex-col space-y-6 w-full max-w-2xl">
       <h1 class="text-2xl font-bold dark:text-primary text-center">My Skills</h1>
       <!-- Resume Cards -->
-      <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full max-w-2xl text-center">
-        <h1 class="text-lg font-medium dark:text-primary"> Proficient with these OS's </h1>
+      <div class="group hover:-translate-y-1 bg-foreground hover:bg-foreground/60 backdrop-blur-sm
+        rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
+        hover:shadow-accent/20">
+        <div>
+          <div class="text-2xl font-semibold bg-gradient-to-r dark:text-primary">Proficient With These
+            OS's</div>
+        </div>
         <div class="flex items-start gap-4 mt-3">
-          <div class="hidden md:flex flex-col items-center pt-8 px-3">
+          <div class="hidden md:flex flex-col items-center justify-center group-hover:scale-110
+            transition-transform pt-8 px-3">
             <font-awesome-icon :icon="['fas', 'desktop']" class="dark:text-primary text-4xl mb-2" />
           </div>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
-            <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
-              <font-awesome-icon :icon="['fab', 'linux']" class="dark:text-primary text-5xl" />
+
+          <div class="flex flex-row flex-wrap gap-4">
+            <div class="px-8 py-2 dark:bg-background/60 rounded-xl text-primary border
+              border-accent/20 hover:border-accent/50 transition-colors text-center gap-2">
+              <font-awesome-icon :icon="['fab', 'linux']" class="dark:text-primary text-5xl mt-1" />
               <span class="dark:text-primary block mt-1">Linux</span>
             </div>
             <div class="dark:bg-background p-3 rounded-lg shadow-md shadow-satin-sheen-gold-500 text-center">
