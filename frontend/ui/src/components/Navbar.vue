@@ -11,10 +11,10 @@ const toggleMobileMenu = () => {
 </script>
 
 <template>
-  <nav class="dark:bg-foreground dark:text-primary shadow-lg">
+  <nav class="dark:bg-foreground dark:text-primary">
     <div class="container mx-auto px-4 md:flex items-center justify-between gap-6">
 
-      <!--TODO: This logo -->
+      <!-- home logo -->
       <div class="flex items-center justify-center md:w-auto w-full">
         <RouterLink to="/" class="py-5 px-2 flex-1 md:flex-col dark:hover:text-accent">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -41,7 +41,7 @@ const toggleMobileMenu = () => {
         </button>
       </div>
 
-      <!-- Desktop view links -->
+      <!-- desktop links -->
       <div class="hidden md:flex items-center space-x-4">
         <NavLinks />
       </div>

@@ -3,8 +3,7 @@
 
 <template>
   <!-- Container for both cards -->
-  <div class="px-6 py-12 flex flex-col md:flex-row md:items-start md:space-x-32 space-y-16
-    justify-start">
+  <div class="px-6 py-12 flex flex-col md:flex-row md:space-x-14 space-y-12 justify-around">
 
     <!-- Profile Card -->
     <div class="flex flex-col space-y-6 w-full max-w-2xl">
@@ -13,10 +12,12 @@
             mx-auto shadow-xl" />
       </div>
 
-      <div class="dark:bg-foreground rounded-2xl shadow-lg p-6 w-full max-w-2xl text-center">
+      <div class="group bg-foreground hover:bg-foreground/60 backdrop-blur-sm
+          rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
+          hover:shadow-accent/20">
         <div class="mt-2">
-          <h1 class="text-2xl font-bold dark:text-primary">Welcome to my site!</h1>
-          <p class="mt-2 dark:text-primary text-left">
+          <h1 class="text-2xl font-bold dark:text-primary text-center">Welcome to my site!</h1>
+          <p class="mt-2 dark:text-secondary text-left">
             My name is Saul Gonzalez, at a young age I have always loved messing with computers and
             being the families in house IT person. In my
             journey to complete my Computer Science degree, I rediscovered a passion that I lost through time. I fell in
@@ -34,19 +35,18 @@
 
       <!-- TODO: move this to the center -->
       <div class="flex justify-center items-center">
-        <div class="group hover:-translate-y-1 bg-foreground hover:bg-foreground/60 backdrop-blur-sm
+        <div class="group bg-foreground hover:bg-foreground/60 backdrop-blur-sm
           rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
           hover:shadow-accent/20">
-          <div class="dark:text-primary text-2xl font-semibold text-center md:text-start mb-2">Contact Me!
-          </div>
+          <div class="dark:text-primary text-2xl font-semibold text-center mb-2">Contact Me!</div>
           <div class="flex justify-center gap-4">
-            <div class="hidden md:flex flex-col items-center justify-center hover:scale-110
+            <div class="flex flex-col items-center justify-center hover:scale-110
               transition-transform">
               <a href="https://www.linkedin.com/in/saul0178">
                 <font-awesome-icon :icon="['fab', 'linkedin']" class="text-4xl dark:text-primary" />
               </a>
             </div>
-            <div class="hidden md:flex flex-col items-center justify-center hover:scale-110
+            <div class="flex flex-col items-center justify-center hover:scale-110
               transition-transform">
               <a href="https://github.com/saul178">
                 <font-awesome-icon :icon="['fab', 'github']" class="text-4xl dark:text-primary" />
@@ -58,8 +58,8 @@
     </div>
 
     <!-- 2nd col with skill cards -->
-    <div class="px-6 py-12 flex flex-wrap justify-center gap-8
-      md:justify-end">
+    <div class="px-6 py-12 flex flex-wrap justify-center items-center gap-8
+      md:justify-end md:items-end">
       <!-- OS grid card -->
       <div class="flex flex-col space-y-6">
         <div class="group w-full max-w-2xl hover:-translate-y-1 bg-foreground hover:bg-foreground/60 backdrop-blur-sm

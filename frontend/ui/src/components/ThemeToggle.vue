@@ -23,4 +23,3 @@ const toggleDark = useToggle(isDark)
     </span>
   </button>
 </template>
-

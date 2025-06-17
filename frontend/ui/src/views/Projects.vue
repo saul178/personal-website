@@ -51,11 +51,11 @@ at the top or bottom have total commits?
             <!-- tag rows (this will probably be a vue component) -->
             <div class="flex flex-row flex-wrap gap-4 mt-4">
               <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2
-                border-accent">Github</span>
+                border-accent/50">Github</span>
               <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2
-                border-accent">api</span>
+                border-accent/50">api</span>
               <span class="dark:text-primary px-2 py-1 rounded-full text-sm border-2
-                border-accent">here</span>
+                border-accent/50">here</span>
             </div>
 
             <div class="md:flex flex-row hidden mt-6 border-t-2 dark:border-background">
