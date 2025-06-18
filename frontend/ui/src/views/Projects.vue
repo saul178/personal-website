@@ -11,7 +11,7 @@ at the top or bottom have total commits?
 
 <template>
   <div class="flex flex-col md:flex-row px-8 py-12 gap-8">
-    <!-- Left Sidebar -->
+    <!-- left area -->
     <div class="flex flex-col space-y-4 gap-2">
       <h2 class="text-4xl font-bold dark:text-primary">Projects</h2>
       <div class="flex justify-start gap-2.5">
@@ -19,12 +19,12 @@ at the top or bottom have total commits?
           <font-awesome-icon :icon="['fab', 'github']" class="text-4xl dark:text-primary" />
         </a>
         <a href="https://github.com/saul178" class="dark:text-primary text-2xl font-bold">
-          View My Github →
+          View them on Github →
         </a>
       </div>
     </div>
 
-    <!-- Right Content Area -->
+    <!-- right area -->
     <div class="md:flex-1 flex-col space-y-6">
       <!-- project card will be a component to be reused -->
       <div

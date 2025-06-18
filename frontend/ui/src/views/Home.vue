@@ -33,35 +33,84 @@
         </div>
       </div>
 
-      <!-- TODO: move this to the center -->
+      <!-- TODO: education card -->
+      <div
+        class="group bg-foreground/50 backdrop-blur-sm border border-accent/20 rounded-2xl shadow-lg p-6 transition-transform hover:shadow-accent/20">
+        <div class="flex items-center gap-4 mb-2">
+          <div class="w-12 h-12 bg-accent/10 flex items-center justify-center rounded-full text-accent text-2xl">
+            <font-awesome-icon :icon="['fas', 'graduation-cap']" />
+          </div>
+          <div>
+            <h2 class="text-xl font-bold dark:text-primary">Education</h2>
+          </div>
+        </div>
+        <!-- education list -->
+        <div class="relative border-l-2 border-background group-hover:border-accent/20 pl-12 space-y-4">
+          <div class="relative mt-2">
+            <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full group-hover:animate-ping"></span>
+            <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full"></span>
+            <h3 class="text-xl font-semibold dark:text-primary">Bachelors of Computer Science</h3>
+            <p class="text-sm dark:text-secondary">Metropolitan State University of Denver (Febuary
+              2019 - December 2025)</p>
+          </div>
+          <div class="relative">
+            <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full group-hover:animate-ping"></span>
+            <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full"></span>
+            <h3 class="text-xl font-semibold dark:text-primary">Associate of Science</h3>
+            <p class="text-sm dark:text-secondary">Frontrange Community College (July 2013 - May
+              2019)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO: move contact card to the bottom when on mobile -->
       <div class="flex justify-center items-center">
         <div class="group bg-foreground hover:bg-foreground/60 backdrop-blur-sm
           rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
           hover:shadow-accent/20">
-          <div class="dark:text-primary text-2xl font-semibold text-center mb-2">Contact Me!</div>
+          <div class="dark:text-primary text-2xl font-semibold text-center mb-2">Connect with me</div>
           <div class="flex justify-center gap-4">
-            <div class="flex flex-col items-center justify-center hover:scale-110
+            <div class="flex items-center justify-center hover:scale-110
               transition-transform">
               <a href="https://www.linkedin.com/in/saul0178">
                 <font-awesome-icon :icon="['fab', 'linkedin']" class="text-4xl dark:text-primary" />
               </a>
             </div>
-            <div class="flex flex-col items-center justify-center hover:scale-110
+            <div class="flex items-center justify-center hover:scale-110
               transition-transform">
               <a href="https://github.com/saul178">
                 <font-awesome-icon :icon="['fab', 'github']" class="text-4xl dark:text-primary" />
               </a>
             </div>
           </div>
+          <div class="flex justify-center mt-4">
+            <div class="text-xl font-semibold text-center dark:text-primary">Download Resume
+              <div class="flex justify-center">
+                <a href="" download="resume">
+                  <div class="w-12 h-12 bg-accent/10 flex items-center justify-center rounded-full
+                    text-accent text-2xl hover:scale-110 transition-transform">
+                    <font-awesome-icon :icon="['fas', 'file-arrow-down']" />
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
 
     <!-- 2nd col with skill cards -->
     <div class="px-6 py-12 flex flex-wrap justify-center items-center gap-8
       md:justify-end md:items-end">
       <!-- OS grid card -->
       <div class="flex flex-col space-y-6">
+        <div class="border-b dark:border-b-accent/20">
+          <div class="bg-gradient-to-r dark:from-primary to-accent bg-clip-text text-transparent
+            text-4xl text-center font-semibold mb-3">
+            My Skills
+          </div>
+        </div>
         <div class="group w-full max-w-2xl hover:-translate-y-1 bg-foreground hover:bg-foreground/60 backdrop-blur-sm
           rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
           hover:shadow-accent/20">
@@ -285,7 +334,7 @@
                   md:text-start">Databases
                   </div>
                   <div class="bg-gradient-to-r dark:from-secondary to-accent bg-clip-text text-transparent text-xl text-center
-                  md:text-start">Proficient with these databases
+                  md:text-start">Proficient with these relational databases
                   </div>
                 </div>
                 <div class="flex flex-wrap gap-2 items-center justify-center md:items-start
@@ -337,13 +386,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- download button maybe backend will handle this not sure yet -->
-        <div class="text-end">
-          <a href="" download="resume" class="text-lg font-bold dark:text-primary">
-            Download my resume <font-awesome-icon :icon="['fas', 'file-arrow-down']" class="dark:text-primary" />
-          </a>
         </div>
       </div>
     </div>
