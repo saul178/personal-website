@@ -29,7 +29,10 @@ at the top or bottom have total commits?
       <!-- project card will be a component to be reused -->
       <div
         class="flex flex-col md:flex-row group hover:-translate-y-1 bg-foreground hover:bg-foreground/60 backdrop-blur-sm p-6 rounded-2xl border border-accent/20 transition-all duration-300 shadow-lg hover:shadow-accent/20">
-        <img class="md:w-80 h-48 mb-4 md:mr-4 rounded-md shadow-lg object-cover"
+
+        <!-- project image here -->
+        <img class="md:w-80 h-48 mb-4 md:mr-4 rounded-md shadow-lg object-cover transition
+          duration-500 ease-in-out opacity-25 group-hover:opacity-100"
           src="../assets/images/snapshot_2025-06-10_13-49-07.png" alt="Project 1">
 
         <div class="flex flex-col justify-between">
