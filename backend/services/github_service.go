@@ -94,4 +94,5 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 }
 
 func (s *GithubService) GetRepoCommits(ctx context.Context) ([]RepoMetadata, error) {
+	return nil, nil
 }
