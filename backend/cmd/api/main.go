@@ -1,6 +1,8 @@
-package api
+package main
 
-import "github.com/saul178/personal-website/internal/server"
+import (
+	"github.com/saul178/personal-website/internal/server"
+)
 
 func main() {
 	routes := server.NewServer()
