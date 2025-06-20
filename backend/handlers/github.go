@@ -37,6 +37,9 @@ func getGithubToken() (string, error) {
 	}
 
 	ghToken := os.Getenv("GITHUB_TOKEN")
+	if ghToken == "" {
+		return "", errors.New("GITHUB_TOKEN is empty: Github api will not function correctly without it.")
+	}
 	return ghToken, nil
 }
 
