@@ -93,3 +93,6 @@ func GetOwnerReposHandler(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, pinnedReposData)
 }
+
+func GetReposCommitsHandler(c *gin.Context) {
+}
