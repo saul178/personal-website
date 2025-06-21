@@ -3,7 +3,6 @@ package services
 import (
 	"context"
 	"errors"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -124,7 +123,7 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 
 type RepoCommitMetadata struct {
 	Author    []string `json:"author,omitempty"`
-	CommitMsg []string `json:"commits,omitempty"`
+	CommitMsg []string `json:"commitMsg,omitempty"`
 	Time      []string `json:"time,omitempty"`
 }
 
