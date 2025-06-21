@@ -60,6 +60,8 @@ type RepoMetadata struct {
 	Title     string         `json:"title,omitempty"`
 	Desc      string         `json:"desc,omitempty"`
 	Languages map[string]int `json:"languages,omitempty"`
+	CreatedAt string         `json:"createdAt,omitempty"`
+	UpdatedAt string         `json:"updatedAt,omitempty"`
 	URL       string         `json:"url,omitempty"`
 }
 
@@ -74,6 +76,24 @@ func getRepoLanguages(ctx context.Context, s *GithubService, owner string, repos
 
 	return languages, nil
 }
+
+/*
+var errors []error
+var errorsMu sync.Mutex
+
+// In your goroutine error handling:
+if err != nil {
+    errorsMu.Lock()
+    errors = append(errors, err)
+    errorsMu.Unlock()
+    return
+}
+
+// After wg.Wait():
+if len(errors) > 0 {
+    // Handle errors as needed
+}
+*/
 
 func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, error) {
 	owner := githubUser
@@ -106,6 +126,8 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 				Title:     repository.GetName(),
 				Desc:      repository.GetDescription(),
 				Languages: repoLanguages,
+				CreatedAt: repository.GetCreatedAt().Format(time.DateTime),
+				UpdatedAt: repository.GetUpdatedAt().Format(time.DateTime),
 				URL:       repository.GetHTMLURL(),
 			}
 			mu.Lock()
