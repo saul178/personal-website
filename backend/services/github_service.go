@@ -10,7 +10,6 @@ import (
 
 	"github.com/google/go-github/v72/github"
 	"github.com/joho/godotenv"
-	"google.golang.org/protobuf/types/known/apipb"
 )
 
 const (

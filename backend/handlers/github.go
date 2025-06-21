@@ -21,17 +21,28 @@ func GetOwnerReposHandler(s *services.GithubService) gin.HandlerFunc {
 		defer cancel()
 
 		repoData, err := s.GetPinnedRepos(ctx)
-
 		if err != nil || len(repoData) == 0 {
 			log.Printf("No repos fetched or error occurred: %v", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to fetch repository data"})
 			return
-
 		}
 
 		c.JSON(http.StatusOK, repoData)
 	}
 }
 
-func GetReposCommitsHandler(c *gin.Context) {
+func GetReposCommitsHandler(s *services.GithubService) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), githubTimeout)
+		defer cancel()
+
+		commitData, err := s.GetRepoCommits(ctx, 3)
+		if err != nil || len(commitData) == 0 {
+			log.Printf("No repos fetched or error occurred: %v", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to fetch repository data"})
+			return
+		}
+
+		c.JSON(http.StatusOK, commitData)
+	}
 }
