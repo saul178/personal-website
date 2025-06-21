@@ -3,9 +3,11 @@ package services
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/google/go-github/v72/github"
@@ -20,13 +22,6 @@ func getPinnedRepos() []string {
 	return []string{"personal-website", "manga-library-proj", "Personal-SampleShare"}
 }
 
-type RepoMetadata struct {
-	Title     string `json:"title,omitempty"`
-	Desc      string `json:"desc,omitempty"`
-	Languages string `json:"languages,omitempty"`
-	URL       string `json:"url,omitempty"`
-}
-
 type GithubService struct {
 	Client *github.Client
 }
@@ -34,19 +29,6 @@ type GithubService struct {
 func NewGithubService() *GithubService {
 	client := initNewGithubClient()
 	return &GithubService{Client: client}
-}
-
-func getGithubToken() (string, error) {
-	err := godotenv.Load()
-	if err != nil {
-		return "", errors.New("failed to load .env file: Github api will not function correctly without it.")
-	}
-
-	ghToken := os.Getenv("GITHUB_TOKEN")
-	if ghToken == "" {
-		return "", errors.New("GITHUB_TOKEN is empty: Github api will not function correctly without it.")
-	}
-	return ghToken, nil
 }
 
 func initNewGithubClient() *github.Client {
@@ -62,33 +44,80 @@ func initNewGithubClient() *github.Client {
 	return client
 }
 
+func getGithubToken() (string, error) {
+	err := godotenv.Load()
+	if err != nil {
+		return "", errors.New("failed to load .env file: Github api will not function correctly without it.")
+	}
+
+	ghToken := os.Getenv("GITHUB_TOKEN")
+	if ghToken == "" {
+		return "", errors.New("GITHUB_TOKEN is empty: Github api will not function correctly without it.")
+	}
+	return ghToken, nil
+}
+
+type RepoMetadata struct {
+	Title     string         `json:"title,omitempty"`
+	Desc      string         `json:"desc,omitempty"`
+	Languages map[string]int `json:"languages,omitempty"`
+	URL       string         `json:"url,omitempty"`
+}
+
+func getRepoLanguages(ctx context.Context, s *GithubService, owner string, repos string) (map[string]int, error) {
+	languages := make(map[string]int)
+	repository, _, err := s.Client.Repositories.ListLanguages(ctx, owner, repos)
+	if err != nil {
+		log.Printf("Error fetching repo (%s) languages: %v", repos, err)
+		return nil, err
+	}
+	languages = repository
+
+	return languages, nil
+}
+
 func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, error) {
 	owner := githubUser
 	repos := getPinnedRepos()
+	var wg sync.WaitGroup
+	var mu sync.Mutex
 
-	var pinnedReposData []RepoMetadata
-	for i := range repos {
-		repository, resp, err := s.Client.Repositories.Get(ctx, owner, repos[i])
-		if err != nil {
-			log.Printf("Error fetching repo %s: %v", repos[i], err)
-			continue
-		}
-		if resp.Response.StatusCode != http.StatusOK {
-			log.Printf("GET request for repo %s responded with %v", repos[i], resp.Response.StatusCode)
-			continue
-		}
+	pinnedReposData := make([]RepoMetadata, len(repos))
+	for i, repoData := range repos {
+		wg.Add(1)
+		go func(i int, repo string) {
+			defer wg.Done()
 
-		metadata := RepoMetadata{
-			Title:     repository.GetName(),
-			Desc:      repository.GetDescription(),
-			Languages: repository.GetLanguage(),
-			URL:       repository.GetHTMLURL(),
-		}
-		pinnedReposData = append(pinnedReposData, metadata)
+			repository, resp, err := s.Client.Repositories.Get(ctx, owner, repoData)
+			if err != nil {
+				log.Printf("Error fetching repo %s: %v", repoData, err)
+				return
+			}
+			if resp.Response.StatusCode != http.StatusOK {
+				log.Printf("GET request for repo %s responded with %v", repoData, resp.Response.StatusCode)
+				return
+			}
+
+			repoLanguages, err := getRepoLanguages(ctx, s, owner, repoData)
+			if err != nil {
+				log.Printf("Error fetching repo (%s) languages: %v", repoData, err)
+			}
+
+			metadata := RepoMetadata{
+				Title:     repository.GetName(),
+				Desc:      repository.GetDescription(),
+				Languages: repoLanguages,
+				URL:       repository.GetHTMLURL(),
+			}
+			mu.Lock()
+			pinnedReposData[i] = metadata
+			mu.Unlock()
+		}(i, repoData)
 	}
+	wg.Wait()
 
 	if len(pinnedReposData) == 0 {
-		return nil, errors.New("failed to fetch repositories successfully.")
+		return nil, errors.New("failed to fetch repositories successfully. Possible API/Network issues.")
 	}
 	return pinnedReposData, nil
 }
