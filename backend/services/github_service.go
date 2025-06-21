@@ -6,9 +6,11 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/google/go-github/v72/github"
 	"github.com/joho/godotenv"
+	"google.golang.org/protobuf/types/known/apipb"
 )
 
 const (
@@ -20,18 +22,17 @@ func getPinnedRepos() []string {
 }
 
 type RepoMetadata struct {
-	Title     string   `json:"title,omitempty"`
-	Desc      string   `json:"desc,omitempty"`
-	Languages string   `json:"languages,omitempty"`
-	Commits   []string `json:"commits,omitempty"`
-	URL       string   `json:"url,omitempty"`
+	Title     string `json:"title,omitempty"`
+	Desc      string `json:"desc,omitempty"`
+	Languages string `json:"languages,omitempty"`
+	URL       string `json:"url,omitempty"`
 }
 
 type GithubService struct {
 	Client *github.Client
 }
 
-func newGithubService() *GithubService {
+func NewGithubService() *GithubService {
 	client := initNewGithubClient()
 	return &GithubService{Client: client}
 }
@@ -93,6 +94,52 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 	return pinnedReposData, nil
 }
 
-func (s *GithubService) GetRepoCommits(ctx context.Context) ([]RepoMetadata, error) {
-	return nil, nil
+type RepoCommitMetadata struct {
+	Author    []string `json:"author,omitempty"`
+	CommitMsg []string `json:"commits,omitempty"`
+	Time      []string `json:"time,omitempty"`
+}
+
+func (s *GithubService) GetRepoCommits(ctx context.Context, limit int) ([]RepoCommitMetadata, error) {
+	owner := githubUser
+	repos := getPinnedRepos()
+	opts := &github.CommitsListOptions{
+		ListOptions: github.ListOptions{PerPage: limit},
+	}
+
+	var commitMetadata []RepoCommitMetadata
+	for i := range repos {
+		commits, resp, err := s.Client.Repositories.ListCommits(ctx, owner, repos[i], opts)
+		if err != nil {
+			log.Printf("Error fetching repo commits %s: %v", repos[i], err)
+			continue
+		}
+		if resp.Response.StatusCode != http.StatusOK {
+			log.Printf("GET request for repo commits %s responded with %v", repos[i], resp.Response.StatusCode)
+			continue
+		}
+
+		var commitMsg []string
+		var commitAuth []string
+		var commitTime []string
+		for _, c := range commits {
+			if c.GetCommit() != nil {
+				commitMsg = append(commitMsg, c.GetCommit().GetMessage())
+				commitAuth = append(commitAuth, c.GetCommit().GetAuthor().GetName())
+				commitTime = append(commitTime, c.GetCommit().GetAuthor().GetDate().Format(time.DateTime))
+
+			}
+		}
+		metadata := RepoCommitMetadata{
+			Author:    commitAuth,
+			CommitMsg: commitMsg,
+			Time:      commitTime,
+		}
+		commitMetadata = append(commitMetadata, metadata)
+	}
+
+	if len(commitMetadata) == 0 {
+		return nil, errors.New("failed to fetch commits for all repos")
+	}
+	return commitMetadata, nil
 }
