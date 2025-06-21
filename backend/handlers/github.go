@@ -17,7 +17,7 @@ const (
 
 func GetOwnerReposHandler(s *services.GithubService) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		ctx, cancel := context.WithTimeout(context.Background(), githubTimeout)
+		ctx, cancel := context.WithTimeout(c.Request.Context(), githubTimeout)
 		defer cancel()
 
 		repoData, err := s.GetPinnedRepos(ctx)
@@ -33,7 +33,7 @@ func GetOwnerReposHandler(s *services.GithubService) gin.HandlerFunc {
 
 func GetReposCommitsHandler(s *services.GithubService) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		ctx, cancel := context.WithTimeout(context.Background(), githubTimeout)
+		ctx, cancel := context.WithTimeout(c.Request.Context(), githubTimeout)
 		defer cancel()
 
 		commitData, err := s.GetRepoCommits(ctx, 3)
