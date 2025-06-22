@@ -3,7 +3,6 @@ package services
 import (
 	"context"
 	"errors"
-	"log"
 	"net/http"
 	"os"
 	"sync"
@@ -11,6 +10,7 @@ import (
 
 	"github.com/google/go-github/v72/github"
 	"github.com/joho/godotenv"
+	m "github.com/saul178/personal-website/middleware"
 )
 
 const (
@@ -33,8 +33,7 @@ func NewGithubService() *GithubService {
 func initNewGithubClient() *github.Client {
 	ghToken, err := getGithubToken()
 	if err != nil {
-		log.Printf("Warning: %v.\n Proceeding without an authenticated Github client.\nCertain features might not work and requests are limited.", err)
-
+		m.WarningLog.Printf("Warning: %v.\n Proceeding without an authenticated Github client.\nCertain features might not work and requests are limited.", err)
 		unauthClient := github.NewClient(nil)
 		return unauthClient
 	}
@@ -69,31 +68,13 @@ func getRepoLanguages(ctx context.Context, s *GithubService, owner string, repos
 	languages := make(map[string]int)
 	repository, _, err := s.Client.Repositories.ListLanguages(ctx, owner, repos)
 	if err != nil {
-		log.Printf("Error fetching repo (%s) languages: %v", repos, err)
+		m.ErrorLog.Printf("Error fetching repo (%s) languages: %v", repos, err)
 		return nil, err
 	}
 	languages = repository
 
 	return languages, nil
 }
-
-/*
-var errors []error
-var errorsMu sync.Mutex
-
-// In your goroutine error handling:
-if err != nil {
-    errorsMu.Lock()
-    errors = append(errors, err)
-    errorsMu.Unlock()
-    return
-}
-
-// After wg.Wait():
-if len(errors) > 0 {
-    // Handle errors as needed
-}
-*/
 
 func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, error) {
 	owner := githubUser
@@ -109,17 +90,17 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 
 			repository, resp, err := s.Client.Repositories.Get(ctx, owner, repoData)
 			if err != nil {
-				log.Printf("Error fetching repo %s: %v", repoData, err)
+				m.ErrorLog.Printf("Error fetching repo %s: %v", repoData, err)
 				return
 			}
 			if resp.Response.StatusCode != http.StatusOK {
-				log.Printf("GET request for repo %s responded with %v", repoData, resp.Response.StatusCode)
+				m.ErrorLog.Printf("GET request for repo %s responded with %v", repoData, resp.Response.StatusCode)
 				return
 			}
 
 			repoLanguages, err := getRepoLanguages(ctx, s, owner, repoData)
 			if err != nil {
-				log.Printf("Error fetching repo (%s) languages: %v", repoData, err)
+				m.ErrorLog.Printf("Error fetching repo (%s) languages: %v", repoData, err)
 			}
 
 			metadata := RepoMetadata{
@@ -160,11 +141,11 @@ func (s *GithubService) GetRepoCommits(ctx context.Context, limit int) ([]RepoCo
 	for i := range repos {
 		commits, resp, err := s.Client.Repositories.ListCommits(ctx, owner, repos[i], opts)
 		if err != nil {
-			log.Printf("Error fetching repo commits %s: %v", repos[i], err)
+			m.ErrorLog.Printf("Error fetching repo commits (%s): %v", repos[i], err)
 			continue
 		}
 		if resp.Response.StatusCode != http.StatusOK {
-			log.Printf("GET request for repo commits %s responded with %v", repos[i], resp.Response.StatusCode)
+			m.ErrorLog.Printf("GET request for repo commits (%s) responded with %v", repos[i], resp.Response.StatusCode)
 			continue
 		}
 

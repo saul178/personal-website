@@ -31,6 +31,7 @@ func GetOwnerReposHandler(s *services.GithubService) gin.HandlerFunc {
 	}
 }
 
+// TODO: need to do the limit better rather then just putting 3
 func GetReposCommitsHandler(s *services.GithubService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(c.Request.Context(), githubTimeout)

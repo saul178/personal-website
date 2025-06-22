@@ -9,8 +9,6 @@ import (
 func SetupRoutes(r *gin.Engine) {
 	// routes will be setup here such as {"/", "projects", "personal", "github"}
 	githubServices := services.NewGithubService()
-
-	r.GET("/api/github-repos", handlers.GetOwnerReposHandler(githubServices))
-
-	r.GET("/api/repos/commits", handlers.GetReposCommitsHandler(githubServices))
+	r.GET("/api/github/repos", handlers.GetOwnerReposHandler(githubServices))
+	r.GET("/api/github/repo-commits", handlers.GetReposCommitsHandler(githubServices))
 }
