@@ -33,7 +33,7 @@ func NewGithubService() *GithubService {
 func initNewGithubClient() *github.Client {
 	ghToken, err := getGithubToken()
 	if err != nil {
-		m.WarningLog.Printf("Warning: %v.\n Proceeding without an authenticated Github client.\nCertain features might not work and requests are limited.", err)
+		m.WarningLog.Printf("Warning: %v.\nProceeding without an authenticated Github client.\nCertain features might not work and requests are limited.", err)
 		unauthClient := github.NewClient(nil)
 		return unauthClient
 	}
@@ -42,6 +42,7 @@ func initNewGithubClient() *github.Client {
 	return client
 }
 
+// TODO: clean up the errors so that it's more readable for all the functions that use errors.new
 func getGithubToken() (string, error) {
 	err := godotenv.Load()
 	if err != nil {
@@ -49,6 +50,7 @@ func getGithubToken() (string, error) {
 	}
 
 	ghToken := os.Getenv("GITHUB_TOKEN")
+	// TODO: this check feels useless, decide to keep or get rid
 	if ghToken == "" {
 		return "", errors.New("GITHUB_TOKEN is empty: Github api will not function correctly without it.")
 	}
@@ -64,6 +66,8 @@ type RepoMetadata struct {
 	URL       string         `json:"url,omitempty"`
 }
 
+// TODO: check for rate limit abuse and also give a context.Withvalue to these functions so that requests sleep till reset
+// look here https://github.com/google/go-github for when doing this.
 func getRepoLanguages(ctx context.Context, s *GithubService, owner string, repos string) (map[string]int, error) {
 	languages := make(map[string]int)
 	repository, _, err := s.Client.Repositories.ListLanguages(ctx, owner, repos)
@@ -90,11 +94,11 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 
 			repository, resp, err := s.Client.Repositories.Get(ctx, owner, repoData)
 			if err != nil {
-				m.ErrorLog.Printf("Error fetching repo %s: %v", repoData, err)
+				m.ErrorLog.Printf("Error fetching repo (%s): %v", repoData, err)
 				return
 			}
 			if resp.Response.StatusCode != http.StatusOK {
-				m.ErrorLog.Printf("GET request for repo %s responded with %v", repoData, resp.Response.StatusCode)
+				m.ErrorLog.Printf("GET request for repo (%s) responded with %v", repoData, resp.Response.StatusCode)
 				return
 			}
 
@@ -103,6 +107,7 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 				m.ErrorLog.Printf("Error fetching repo (%s) languages: %v", repoData, err)
 			}
 
+			// TODO: look into better time formats
 			metadata := RepoMetadata{
 				Title:     repository.GetName(),
 				Desc:      repository.GetDescription(),
@@ -158,6 +163,9 @@ func (s *GithubService) GetRepoCommits(ctx context.Context, limit int) ([]RepoCo
 				commitAuth = append(commitAuth, c.GetCommit().GetAuthor().GetName())
 				commitTime = append(commitTime, c.GetCommit().GetAuthor().GetDate().Format(time.DateTime))
 
+			} else {
+				m.ErrorLog.Println("GET commits returned nil, failed to append results.")
+				continue
 			}
 		}
 		metadata := RepoCommitMetadata{
