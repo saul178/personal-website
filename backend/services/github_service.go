@@ -43,6 +43,7 @@ func initNewGithubClient() *github.Client {
 }
 
 // TODO: clean up the errors so that it's more readable for all the functions that use errors.new
+// TODO: look into caching so that requests arent being made every refresh: redis vs manually doing it
 func getGithubToken() (string, error) {
 	err := godotenv.Load()
 	if err != nil {
@@ -61,8 +62,8 @@ type RepoMetadata struct {
 	Title     string         `json:"title,omitempty"`
 	Desc      string         `json:"desc,omitempty"`
 	Languages map[string]int `json:"languages,omitempty"`
-	CreatedAt string         `json:"createdAt,omitempty"`
-	UpdatedAt string         `json:"updatedAt,omitempty"`
+	CreatedAt string         `json:"created_at,omitempty"`
+	UpdatedAt string         `json:"updated_at,omitempty"`
 	URL       string         `json:"url,omitempty"`
 }
 
@@ -131,7 +132,7 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 
 type RepoCommitMetadata struct {
 	Author    []string `json:"author,omitempty"`
-	CommitMsg []string `json:"commitMsg,omitempty"`
+	CommitMsg []string `json:"commit_msg,omitempty"`
 	Time      []string `json:"time,omitempty"`
 }
 
