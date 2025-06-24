@@ -1,0 +1,44 @@
+{
+	"education": [
+		{
+			"school": "Metropolitan State University of Denver",
+			"degree": "Bachelor of Science in Computer Science",
+			"date_completed": "Febuary 2019 - December 2025"
+		},
+		{
+			"school": "Front Range Community College",
+			"degree": "Associate of Science degree",
+			"date_completed": "February 2014 - May 2019"
+		}
+	],
+	"skills": {
+		"os": {
+			"linux": "Linux",
+			"windows": "Windows",
+			"apple": "Apple"
+		},
+		"languages": {
+			"golang": "Golang",
+			"python": "Python",
+			"java": "Java",
+			"javascript": "JavaScript",
+			"html": "HTML"
+		},
+		"tools": {
+			"docker": "Docker",
+			"git": "Git",
+			"github": "GitHub"
+		},
+		"frameworks": {
+			"vue": "Vue.js",
+			"tailwind": "Tailwind CSS",
+			"django": "Django",
+			"bootstrap": "Bootstrap"
+		},
+		"databases": {
+			"mysql": "MySQL",
+			"postgresql": "PostgreSQL",
+			"sqlite": "SQLite"
+		}
+	}
+}
