@@ -13,6 +13,7 @@ func NewServer() *gin.Engine {
 	// like a logger, recovery, etc.
 	middleware.InfoLog.Println("initializing cors middleware")
 	router.Use(middleware.CORSMiddleware())
+	router.Use(middleware.CacheMiddleware())
 
 	return router
 }
