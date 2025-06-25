@@ -13,4 +13,10 @@ func SetupRoutes(r *gin.Engine) {
 
 	// home page metadata
 	r.GET("api/resume", handlers.GetHomeDataHandler())
+
+	// serve the resume file to be downloaded
+	r.GET("api/download-resume", handlers.GetDownloadResumeHandler())
+
+	// TODO: serve music files to be streamed on personal page
+	// r.GET("api/music", handlers.GetMusicDataHandler())
 }

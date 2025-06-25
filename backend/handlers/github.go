@@ -1,4 +1,3 @@
-// gin http handlers here
 package handlers
 
 import (
@@ -16,6 +15,7 @@ const (
 	commitMsgLimit = 3
 )
 
+// TODO: cache these requests so that it doesnt request all the time maybe redis?
 func GetOwnerReposHandler(s *services.GithubService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(c.Request.Context(), githubTimeout)

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import instance from "@/services/api";
+import axiosInstance from "@/services/api";
 
 export const useGithubStore = defineStore("github", {
   state: () => ({
@@ -18,7 +18,7 @@ export const useGithubStore = defineStore("github", {
   actions: {
     async fetchGithubRepos() {
       try {
-        const resp = await instance.get("/github/repos")
+        const resp = await axiosInstance.get("/github/repos")
         this.repos = resp.data
       }
       catch (error) {
@@ -29,7 +29,7 @@ export const useGithubStore = defineStore("github", {
 
     async fetchGithubCommits(repoName) {
       try {
-        const resp = await instance.get(`/github/commits?repo=${repoName}`)
+        const resp = await axiosInstance.get(`/github/commits?repo=${repoName}`)
         this.commitsByRepo[repoName] = resp.data
       }
       catch (error) {

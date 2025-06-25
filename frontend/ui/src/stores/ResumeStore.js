@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import instance from "@/services/api";
+import axiousInstance from "@/services/api";
 
 export const useResumeStore = defineStore("resume", {
   state: () => ({
@@ -11,7 +11,8 @@ export const useResumeStore = defineStore("resume", {
       frameworks: {},
       databases: {},
     },
-
+    pdfBlobUrl: null,
+    error: null,
   }),
   getters: {
     getEducation(state) {
@@ -25,13 +26,36 @@ export const useResumeStore = defineStore("resume", {
   actions: {
     async fetchResumeData() {
       try {
-        const resp = await instance.get("/resume")
+        const resp = await axiousInstance.get("/resume")
         this.education = resp.data.education
         this.skills = resp.data.skills
       }
       catch (error) {
         alert("failed to fetch resume data: ", error)
         console.log(error)
+      }
+    },
+
+    async fetchResumePdf() {
+      this.error = null
+      try {
+        const resp = await axiousInstance.get("/download-resume", {
+          responseType: 'blob',
+
+        })
+        const blob = new Blob([resp.data], { type: 'application/pdf' })
+
+        // NOTE: supposedly this helps prevent memory leaks when dealing with blobs
+        // garbage collector marks blobs as uncollectable so you have to set to release the
+        // protection so that the GC can collect it when it runs
+        if (this.pdfBlobUrl) {
+          URL.revokeObjectURL(this.pdfBlobUrl)
+        }
+
+        this.pdfBlobUrl = URL.createObjectURL(blob)
+      } catch (e) {
+        console.log("pdf fetch failed: ", e)
+        this.error = e
       }
     }
   }

@@ -1,6 +1,8 @@
 # If you prefer the allow list template instead of the deny list, see community template:
 # https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
 #
+# Ignore media files
+internal/assets
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -40,3 +42,4 @@ Thumbs.db
 # Any other temporary or generated files
 *.out
 *.txt
+

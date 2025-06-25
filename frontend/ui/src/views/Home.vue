@@ -1,13 +1,18 @@
 <script setup>
+// TODO: map the font icons from fontawesome so that we can for loop and just use one tage for all
+// the skills
 import { useResumeStore } from '@/stores/ResumeStore';
 import { computed, onMounted } from 'vue';
 
 const store = useResumeStore()
+
 const getEducation = computed(() => store.getEducation)
 const getSkills = computed(() => store.getSkills)
+const getPdfUrl = computed(() => store.pdfBlobUrl)
 
 onMounted(() => {
   store.fetchResumeData()
+  store.fetchResumePdf()
 })
 </script>
 
@@ -89,9 +94,9 @@ onMounted(() => {
           <div class="flex justify-center mt-4">
             <div class="text-xl font-semibold text-center dark:text-primary">Download Resume
               <div class="flex justify-center">
-                <a href="" download="resume">
+                <a :href="getPdfUrl" download="resume">
                   <div class="w-12 h-12 bg-accent/10 flex items-center justify-center rounded-full
-                    text-accent text-2xl hover:scale-110 transition-transform">
+                    text-accent text-2xl hover:scale-110 transition-transform cursor-pointer">
                     <font-awesome-icon :icon="['fas', 'file-arrow-down']" />
                   </div>
                 </a>
