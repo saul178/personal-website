@@ -1,4 +1,14 @@
 <script setup>
+import { useResumeStore } from '@/stores/ResumeStore';
+import { computed, onMounted } from 'vue';
+
+const store = useResumeStore()
+const getEducation = computed(() => store.getEducation)
+const getSkills = computed(() => store.getSkills)
+
+onMounted(() => {
+  store.fetchResumeData()
+})
 </script>
 
 <template>
@@ -46,19 +56,11 @@
         </div>
         <!-- education list -->
         <div class="relative border-l-2 border-background group-hover:border-accent/20 pl-12 space-y-4">
-          <div class="relative mt-2">
+          <div v-for="(school, i) in getEducation" :key="i" class="relative mt-2">
             <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full group-hover:animate-ping"></span>
             <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full"></span>
-            <h3 class="text-xl font-semibold dark:text-primary">Bachelors of Computer Science</h3>
-            <p class="text-sm dark:text-secondary">Metropolitan State University of Denver (Febuary
-              2019 - December 2025)</p>
-          </div>
-          <div class="relative">
-            <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full group-hover:animate-ping"></span>
-            <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full"></span>
-            <h3 class="text-xl font-semibold dark:text-primary">Associate of Science</h3>
-            <p class="text-sm dark:text-secondary">Frontrange Community College (July 2013 - May
-              2019)</p>
+            <h3 class="text-xl font-semibold dark:text-primary">{{ school.degree }}</h3>
+            <p class="text-sm dark:text-secondary">{{ school.school }} ({{ school.date_completed }})</p>
           </div>
         </div>
       </div>
@@ -135,17 +137,17 @@
                 <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                   border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                   <font-awesome-icon :icon="['fab', 'linux']" class="dark:text-primary text-4xl" />
-                  <span class="dark:text-primary text-lg">Linux</span>
+                  <span class="dark:text-primary text-lg">{{ getSkills.os.linux }}</span>
                 </span>
                 <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                   border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                   <font-awesome-icon :icon="['fab', 'windows']" class="dark:text-primary text-4xl" alt="Windows" />
-                  <span class="dark:text-primary text-lg"> Windows </span>
+                  <span class="dark:text-primary text-lg"> {{ getSkills.os.windows }} </span>
                 </span>
                 <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                   border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                   <font-awesome-icon :icon="['fab', 'apple']" class="dark:text-primary text-4xl" alt="Apple" />
-                  <span class="dark:text-primary text-lg"> Apple </span>
+                  <span class="dark:text-primary text-lg"> {{ getSkills.os.apple }}</span>
                 </span>
               </div>
             </div>
@@ -176,27 +178,27 @@
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'golang']" class="dark:text-primary text-4xl" alt="Golang" />
-                    <span class="dark:text-primary text-lg"> Golang </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.languages.golang }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'python']" class="dark:text-primary text-4xl" alt="Python" />
-                    <span class="dark:text-primary text-lg"> Python </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.languages.python }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'java']" class="dark:text-primary text-4xl" alt="Java" />
-                    <span class="dark:text-primary text-lg"> Java </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.languages.java }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'js']" class="dark:text-primary text-4xl" alt="JavaScript" />
-                    <span class="dark:text-primary text-lg"> JavaScript </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.languages.javascript }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'html5']" class="dark:text-primary text-4xl" alt="HTML" />
-                    <span class="dark:text-primary text-lg">HTML</span>
+                    <span class="dark:text-primary text-lg">{{ getSkills.languages.html }}</span>
                   </span>
                 </div>
               </div>
@@ -229,17 +231,17 @@
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'docker']" class="dark:text-primary text-4xl" alt="docker" />
-                    <span class="dark:text-primary text-lg"> Docker </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.tools.docker }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'git-alt']" class="dark:text-primary text-4xl" alt="Git" />
-                    <span class="dark:text-primary text-lg"> Git </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.tools.git }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'github']" class="dark:text-primary text-4xl" alt="Github" />
-                    <span class="dark:text-primary text-lg"> Github </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.tools.github }} </span>
                   </span>
                 </div>
               </div>
@@ -271,7 +273,7 @@
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'vuejs']" class="dark:text-primary text-4xl" alt="Vuejs" />
-                    <span class="dark:text-primary text-lg"> Vue.js </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.frameworks.vue }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
@@ -285,7 +287,7 @@
                           stroke="currentColor" stroke-linejoin="round"></path>
                       </g>
                     </svg>
-                    <span class="dark:text-primary text-lg"> Tailwind CSS </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.frameworks.tailwind }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
@@ -305,12 +307,12 @@
                         </path>
                       </g>
                     </svg>
-                    <span class="dark:text-primary text-lg"> Django </span>
+                    <span class="dark:text-primary text-lg"> {{ getSkills.frameworks.django }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'bootstrap']" class="dark:text-primary text-4xl" />
-                    <span class="dark:text-primary text-lg">Bootstrap</span>
+                    <span class="dark:text-primary text-lg">{{ getSkills.frameworks.bootstrap }}</span>
                   </span>
                 </div>
               </div>
@@ -352,7 +354,7 @@
                         </path>
                       </g>
                     </svg>
-                    <span class="dark:text-primary block mt-1"> MySQL</span>
+                    <span class="dark:text-primary block mt-1"> {{ getSkills.databases.mysql }}</span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                         border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
@@ -366,7 +368,7 @@
                         </path>
                       </g>
                     </svg>
-                    <span class="dark:text-primary block mt-1"> PostgreSQL</span>
+                    <span class="dark:text-primary block mt-1"> {{ getSkills.databases.postgresql }}</span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                         border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
@@ -381,7 +383,7 @@
                         </path>
                       </g>
                     </svg>
-                    <span class="dark:text-primary block mt-1"> SQLite</span>
+                    <span class="dark:text-primary block mt-1"> {{ getSkills.databases.sqlite }}</span>
                   </span>
                 </div>
               </div>
