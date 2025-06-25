@@ -136,22 +136,22 @@ type RepoCommitMetadata struct {
 	Time      []string `json:"time,omitempty"`
 }
 
-func (s *GithubService) GetRepoCommits(ctx context.Context, limit int) ([]RepoCommitMetadata, error) {
+func (s *GithubService) GetRepoCommits(ctx context.Context, limit int) (map[string]RepoCommitMetadata, error) {
 	owner := githubUser
 	repos := getPinnedRepos()
 	opts := &github.CommitsListOptions{
 		ListOptions: github.ListOptions{PerPage: limit},
 	}
 
-	var commitMetadata []RepoCommitMetadata
-	for i := range repos {
-		commits, resp, err := s.Client.Repositories.ListCommits(ctx, owner, repos[i], opts)
+	commitMetadata := make(map[string]RepoCommitMetadata)
+	for _, repoName := range repos {
+		commits, resp, err := s.Client.Repositories.ListCommits(ctx, owner, repoName, opts)
 		if err != nil {
-			m.ErrorLog.Printf("Error fetching repo commits (%s): %v", repos[i], err)
+			m.ErrorLog.Printf("Error fetching repo commits (%s): %v", repoName, err)
 			continue
 		}
 		if resp.Response.StatusCode != http.StatusOK {
-			m.ErrorLog.Printf("GET request for repo commits (%s) responded with %v", repos[i], resp.Response.StatusCode)
+			m.ErrorLog.Printf("GET request for repo commits (%s) responded with %v", repoName, resp.Response.StatusCode)
 			continue
 		}
 
@@ -169,16 +169,51 @@ func (s *GithubService) GetRepoCommits(ctx context.Context, limit int) ([]RepoCo
 				continue
 			}
 		}
-		metadata := RepoCommitMetadata{
+		commitMetadata[repoName] = RepoCommitMetadata{
 			Author:    commitAuth,
 			CommitMsg: commitMsg,
 			Time:      commitTime,
 		}
-		commitMetadata = append(commitMetadata, metadata)
 	}
 
 	if len(commitMetadata) == 0 {
 		return nil, errors.New("failed to fetch commits for all repos")
 	}
 	return commitMetadata, nil
+}
+
+func (s *GithubService) GetCommitsForRepo(ctx context.Context, repo string, limit int) (*RepoCommitMetadata, error) {
+	owner := githubUser
+	opts := &github.CommitsListOptions{
+		ListOptions: github.ListOptions{PerPage: limit},
+	}
+
+	commits, resp, err := s.Client.Repositories.ListCommits(ctx, owner, repo, opts)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.Response.StatusCode != http.StatusOK {
+		m.ErrorLog.Printf("GET request for repo commits (%s) responded with %v", repo, resp.Response.StatusCode)
+		return nil, err
+	}
+
+	var commitMsg []string
+	var commitAuth []string
+	var commitTime []string
+	for _, c := range commits {
+		if c.GetCommit() != nil {
+			commitMsg = append(commitMsg, c.GetCommit().GetMessage())
+			commitAuth = append(commitAuth, c.GetCommit().GetAuthor().GetName())
+			commitTime = append(commitTime, c.GetCommit().GetAuthor().GetDate().Format(time.DateTime))
+		}
+	}
+
+	metadata := &RepoCommitMetadata{
+		Author:    commitAuth,
+		CommitMsg: commitMsg,
+		Time:      commitTime,
+	}
+
+	return metadata, nil
 }

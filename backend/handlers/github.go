@@ -37,6 +37,19 @@ func GetReposCommitsHandler(s *services.GithubService) gin.HandlerFunc {
 		ctx, cancel := context.WithTimeout(c.Request.Context(), githubTimeout)
 		defer cancel()
 
+		repoName := c.Query("repo")
+		if repoName != "" {
+			commitData, err := s.GetCommitsForRepo(ctx, repoName, 3)
+			if err != nil {
+				log.Printf("Error fetching commits for %s: %v", repoName, err)
+				c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to fetch commit data for repo"})
+				return
+			}
+
+			c.JSON(http.StatusOK, commitData)
+			return
+		}
+
 		commitData, err := s.GetRepoCommits(ctx, 3)
 		if err != nil || len(commitData) == 0 {
 			log.Printf("No repos fetched or error occurred: %v", err)
