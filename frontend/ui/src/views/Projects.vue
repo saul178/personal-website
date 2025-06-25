@@ -1,24 +1,16 @@
-<!-- what to show from the github api
-name or full name not sure if this is for the repo or user
-description box of the repo
-created at, updated at or pushed at?
-commits??
-url hyperlink?
-see if i can get what languages are used???
-
-at the top or bottom have total commits?
--->
-
 <template>
   <div class="flex flex-col md:flex-row px-8 py-12 gap-8">
     <!-- left area -->
     <div class="flex flex-col space-y-4 gap-2">
       <h2 class="text-4xl font-bold dark:text-primary">Projects</h2>
       <div class="flex justify-start gap-2.5">
-        <a href="https://github.com/saul178" class="dark:text-primary text-2xl font-bold">
-          <font-awesome-icon :icon="['fab', 'github']" class="text-4xl dark:text-primary" />
-        </a>
-        <a href="https://github.com/saul178" class="dark:text-primary text-2xl font-bold">
+        <div class="hover:scale-110 transition-all">
+          <a href="https://github.com/saul178" class="dark:text-primary text-2xl font-bold">
+            <font-awesome-icon :icon="['fab', 'github']" class="text-4xl hover:text-primary/60 dark:text-primary" />
+          </a>
+        </div>
+        <a href="https://github.com/saul178" class="dark:text-primary text-2xl font-bold
+          hover:text-primary/60">
           View them on Github →
         </a>
       </div>
@@ -31,6 +23,10 @@ at the top or bottom have total commits?
         class="flex flex-col md:flex-row group hover:-translate-y-1 bg-foreground hover:bg-foreground/60 backdrop-blur-sm p-6 rounded-2xl border border-accent/20 transition-all duration-300 shadow-lg hover:shadow-accent/20">
 
         <!-- project image here -->
+        <!--
+            FIX: each repo shares the same image need to fix it so that a repo has their own image
+            or a default image if not set
+        -->
         <img class="md:w-80 h-48 mb-4 md:mr-4 rounded-md shadow-lg object-cover transition
           duration-500 ease-in-out opacity-25 group-hover:opacity-100"
           src="../assets/images/snapshot_2025-06-10_13-49-07.png" alt="Project 1">
@@ -38,7 +34,12 @@ at the top or bottom have total commits?
         <div class="flex flex-col justify-between">
           <!--TODO: fix the alignment here and make it presentable -->
           <div>
-            <h3 class="text-xl font-semibold dark:text-primary first-letter:uppercase">{{ repo.title }}</h3>
+            <h3 class="text-xl font-semibold dark:text-primary capitalize
+              hover:text-accent/60">
+              <a :href="repo.url">
+                {{ repo.title.replace(/-/g, ' ') }}
+              </a>
+            </h3>
             <div class="flex flex-row gap-4 mt-1 mb-2">
               <h3 class="text-sm dark:text-primary">Created at - {{ repo.created_at }}</h3>
               <h3 class="text-sm dark:text-primary">Updated at - {{ repo.updated_at }}</h3>
@@ -52,25 +53,26 @@ at the top or bottom have total commits?
 
             <!-- tag rows (this will probably be a vue component) -->
             <div class="flex flex-row flex-wrap gap-4 mt-4">
-              <span v-for="lang in Object.keys(repo.languages)" :key="lang" class="dark:text-primary px-2 py-1 rounded-full text-sm border-2
-                border-accent/50">{{ lang }}</span>
+              <span v-for="lang in Object.keys(repo.languages)" :key="lang"
+                class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent/50">{{ lang }}</span>
             </div>
 
+            <!-- this should also be it's own component -->
             <div class="md:flex flex-row hidden mt-6 border-t-2 dark:border-background">
               <h3 class="dark:text-secondary font-semibold mt-2">Commit History</h3>
             </div>
-            <div v-for="(author, i) in store.commitsByRepo[repo.title]?.author || []" :key="i" class="mt-2">
-              <span class="dark:text-secondary block">
-                {{ author }}: {{ store.commitsByRepo[repo.title].time[i] }} — "{{
-                  store.commitsByRepo[repo.title].commit_msg[i] }}"
+            <div v-if="store.commitsByRepo[repo.title]" class="mt-2">
+              <span v-for="commit in getCommitsForRepo(repo.title)" :key="commit.sha" class="dark:text-secondary block">
+                {{ commit.author }}: "{{ commit.msg }}" - {{ commit.time }}
               </span>
+            </div>
+            <div v-else class="mt-2">
+              <span class="dark:text-secondary block italic">Loading commit history...</span>
             </div>
           </div>
         </div>
       </div>
       <!-- project card component end -->
-
-      <!-- other projects -->
     </div>
   </div>
 
@@ -92,14 +94,31 @@ import { onMounted, computed } from 'vue';
 import { useGithubStore } from '@/stores/GithubStore';
 
 const store = useGithubStore()
-const getRepos = computed(() => {
-  return store.getGithubRepos
-})
+const getRepos = computed(() => store.getGithubRepos)
+
+// NOTE: this can be used to debug
+// watch(() => store.commitsByRepo, (val) => {
+//   console.log("commitsByRepo changed", val)
+// }, { deep: true })
+//
+const getCommitsForRepo = (repoTitle) => {
+  const data = store.commitsByRepo[repoTitle]
+
+  if (!data) {
+    console.log("failed to fetch commit data for repoTitle", repoTitle)
+    return []
+  }
+
+  return data.author.map((author, i) => ({
+    author,
+    msg: data.commit_msg[i],
+    time: data.time[i],
+  }))
+}
 
 onMounted(() => {
   store.fetchGithubRepos().then(() => {
     store.repos.forEach(repo => {
-      console.log("Fetching commits for:", repo.title)
       store.fetchGithubCommits(repo.title)
     })
   })

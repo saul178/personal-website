@@ -113,8 +113,8 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 				Title:     repository.GetName(),
 				Desc:      repository.GetDescription(),
 				Languages: repoLanguages,
-				CreatedAt: repository.GetCreatedAt().Format(time.DateTime),
-				UpdatedAt: repository.GetUpdatedAt().Format(time.DateTime),
+				CreatedAt: repository.GetCreatedAt().Format(time.DateOnly),
+				UpdatedAt: repository.GetUpdatedAt().Format(time.DateOnly),
 				URL:       repository.GetHTMLURL(),
 			}
 			mu.Lock()
@@ -134,52 +134,7 @@ type RepoCommitMetadata struct {
 	Author    []string `json:"author,omitempty"`
 	CommitMsg []string `json:"commit_msg,omitempty"`
 	Time      []string `json:"time,omitempty"`
-}
-
-func (s *GithubService) GetRepoCommits(ctx context.Context, limit int) (map[string]RepoCommitMetadata, error) {
-	owner := githubUser
-	repos := getPinnedRepos()
-	opts := &github.CommitsListOptions{
-		ListOptions: github.ListOptions{PerPage: limit},
-	}
-
-	commitMetadata := make(map[string]RepoCommitMetadata)
-	for _, repoName := range repos {
-		commits, resp, err := s.Client.Repositories.ListCommits(ctx, owner, repoName, opts)
-		if err != nil {
-			m.ErrorLog.Printf("Error fetching repo commits (%s): %v", repoName, err)
-			continue
-		}
-		if resp.Response.StatusCode != http.StatusOK {
-			m.ErrorLog.Printf("GET request for repo commits (%s) responded with %v", repoName, resp.Response.StatusCode)
-			continue
-		}
-
-		var commitMsg []string
-		var commitAuth []string
-		var commitTime []string
-		for _, c := range commits {
-			if c.GetCommit() != nil {
-				commitMsg = append(commitMsg, c.GetCommit().GetMessage())
-				commitAuth = append(commitAuth, c.GetCommit().GetAuthor().GetName())
-				commitTime = append(commitTime, c.GetCommit().GetAuthor().GetDate().Format(time.DateTime))
-
-			} else {
-				m.ErrorLog.Println("GET commits returned nil, failed to append results.")
-				continue
-			}
-		}
-		commitMetadata[repoName] = RepoCommitMetadata{
-			Author:    commitAuth,
-			CommitMsg: commitMsg,
-			Time:      commitTime,
-		}
-	}
-
-	if len(commitMetadata) == 0 {
-		return nil, errors.New("failed to fetch commits for all repos")
-	}
-	return commitMetadata, nil
+	Sha       []string `json:"sha,omitempty"`
 }
 
 func (s *GithubService) GetCommitsForRepo(ctx context.Context, repo string, limit int) (*RepoCommitMetadata, error) {
@@ -198,14 +153,13 @@ func (s *GithubService) GetCommitsForRepo(ctx context.Context, repo string, limi
 		return nil, err
 	}
 
-	var commitMsg []string
-	var commitAuth []string
-	var commitTime []string
+	var commitMsg, commitAuth, commitTime, commitSha []string
 	for _, c := range commits {
 		if c.GetCommit() != nil {
 			commitMsg = append(commitMsg, c.GetCommit().GetMessage())
 			commitAuth = append(commitAuth, c.GetCommit().GetAuthor().GetName())
-			commitTime = append(commitTime, c.GetCommit().GetAuthor().GetDate().Format(time.DateTime))
+			commitTime = append(commitTime, c.GetCommit().GetAuthor().GetDate().Format(time.DateOnly))
+			commitSha = append(commitSha, c.GetCommit().GetSHA())
 		}
 	}
 
@@ -213,6 +167,7 @@ func (s *GithubService) GetCommitsForRepo(ctx context.Context, repo string, limi
 		Author:    commitAuth,
 		CommitMsg: commitMsg,
 		Time:      commitTime,
+		Sha:       commitSha,
 	}
 
 	return metadata, nil

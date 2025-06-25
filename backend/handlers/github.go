@@ -12,7 +12,8 @@ import (
 )
 
 const (
-	githubTimeout = 5 * time.Second
+	githubTimeout  = 5 * time.Second
+	commitMsgLimit = 3
 )
 
 func GetOwnerReposHandler(s *services.GithubService) gin.HandlerFunc {
@@ -38,22 +39,11 @@ func GetReposCommitsHandler(s *services.GithubService) gin.HandlerFunc {
 		defer cancel()
 
 		repoName := c.Query("repo")
-		if repoName != "" {
-			commitData, err := s.GetCommitsForRepo(ctx, repoName, 3)
-			if err != nil {
-				log.Printf("Error fetching commits for %s: %v", repoName, err)
-				c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to fetch commit data for repo"})
-				return
-			}
-
-			c.JSON(http.StatusOK, commitData)
-			return
-		}
-
-		commitData, err := s.GetRepoCommits(ctx, 3)
-		if err != nil || len(commitData) == 0 {
-			log.Printf("No repos fetched or error occurred: %v", err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to fetch repository data"})
+		// NOTE: we can assume repoName wont be empty sinces we are hard coding the pinned repos anyways
+		commitData, err := s.GetCommitsForRepo(ctx, repoName, commitMsgLimit)
+		if err != nil {
+			log.Printf("Error fetching commits for %s: %v", repoName, err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to fetch commit data for repo"})
 			return
 		}
 

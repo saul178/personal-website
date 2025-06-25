@@ -73,13 +73,14 @@
             <div class="flex items-center justify-center hover:scale-110
               transition-transform">
               <a href="https://www.linkedin.com/in/saul0178">
-                <font-awesome-icon :icon="['fab', 'linkedin']" class="text-4xl dark:text-primary" />
+                <font-awesome-icon :icon="['fab', 'linkedin']"
+                  class="text-4xl dark:text-primary hover:text-primary/60" />
               </a>
             </div>
             <div class="flex items-center justify-center hover:scale-110
               transition-transform">
               <a href="https://github.com/saul178">
-                <font-awesome-icon :icon="['fab', 'github']" class="text-4xl dark:text-primary" />
+                <font-awesome-icon :icon="['fab', 'github']" class="text-4xl dark:text-primary hover:text-primary/60" />
               </a>
             </div>
           </div>
