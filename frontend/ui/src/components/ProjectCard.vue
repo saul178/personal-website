@@ -1,22 +1,17 @@
 <script setup>
-import { onMounted, computed } from 'vue';
-import { useGithubStore } from '@/stores/GithubStore';
+import { useGithubStore } from '@/stores/GithubStore'
 
 const store = useGithubStore()
-const getRepos = computed(() => store.getGithubRepos)
+const props = defineProps({
+  repo: {
+    type: Object,
+  }
+})
 
-// NOTE: this can be used to debug
-// watch(() => store.commitsByRepo, (val) => {
-//   console.log("commitsByRepo changed", val)
-// }, { deep: true })
-//
+
 const getCommitsForRepo = (repoTitle) => {
   const data = store.commitsByRepo[repoTitle]
-
-  if (!data) {
-    console.log("failed to fetch commit data for repo: ", repoTitle)
-    return []
-  }
+  if (!data) return []
 
   return data.author.map((author, i) => ({
     author,
@@ -24,20 +19,10 @@ const getCommitsForRepo = (repoTitle) => {
     time: data.time[i],
   }))
 }
-
-onMounted(() => {
-  store.fetchGithubRepos().then(() => {
-    store.repos.forEach(repo => {
-      store.fetchGithubCommits(repo.title)
-    })
-  })
-})
-
-
 </script>
 
 <template>
-  <div v-for="repo in getRepos" :key="repo.title"
+  <div
     class="flex flex-col md:flex-row group hover:-translate-y-1 bg-foreground hover:bg-foreground/60 backdrop-blur-sm p-6 rounded-2xl border border-accent/20 transition-all duration-300 shadow-lg hover:shadow-accent/20">
     <!-- project image here -->
     <!--  FIX: each repo shares the same image need to fix it so that a repo has their own image or a default image if not set -->
@@ -59,7 +44,7 @@ onMounted(() => {
         </div>
         <div>
           <h2 class="text-sm font-semibold dark:text-primary">Description</h2>
-          <p class="mt-2 dark:text-secondary"> <!-- this need to change for lightmode -->
+          <p class="mt-2 dark:text-secondary">
             {{ repo.desc || 'No description available' }}
           </p>
         </div>

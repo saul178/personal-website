@@ -11,7 +11,7 @@ const toggleMobileMenu = () => {
 </script>
 
 <template>
-  <nav class="bg-gradient-to-t dark:from-foreground to-background dark:text-primary">
+  <nav class="shadow-md rounded-b-lg dark:bg-foreground dark:text-primary">
     <div class="container mx-auto px-4 md:flex items-center justify-between gap-6">
 
       <!-- home logo -->
@@ -52,7 +52,7 @@ const toggleMobileMenu = () => {
 
     <!-- mobile nav links -->
     <div v-if="isMobileMenuOpen" class="md:hidden flex flex-col px-4 pb-4 space-y-2
-      bg-gradient-to-t dark:from-foreground to-background ">
+      bg-gradient-to-b dark:from-foreground to-background ">
       <NavLinks />
       <ThemeToggle mobile="true" />
     </div>
