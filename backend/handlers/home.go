@@ -10,7 +10,7 @@ import (
 	m "github.com/saul178/personal-website/middleware"
 )
 
-// TODO: these modals should be separated from the handlers
+// TODO: these models should be separated from the handlers
 type Skills struct {
 	OS         map[string]string `json:"os"`
 	Languages  map[string]string `json:"languages"`

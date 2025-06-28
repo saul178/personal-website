@@ -31,8 +31,7 @@ export const useResumeStore = defineStore("resume", {
         this.skills = resp.data.skills
       }
       catch (error) {
-        alert("failed to fetch resume data: ", error)
-        console.log(error)
+        console.warn("failed to fetch resume data, possible backend issue: ", error)
       }
     },
 
@@ -53,9 +52,9 @@ export const useResumeStore = defineStore("resume", {
         }
 
         this.pdfBlobUrl = URL.createObjectURL(blob)
-      } catch (e) {
-        console.log("pdf fetch failed: ", e)
-        this.error = e
+      } catch (error) {
+        console.warn("pdf fetch failed, possible issues with backend: ", error)
+        this.error = error
       }
     }
   }
