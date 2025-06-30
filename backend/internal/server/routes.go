@@ -8,8 +8,9 @@ import (
 
 func SetupRoutes(r *gin.Engine) {
 	githubServices := services.NewGithubService()
-	r.GET("/api/github/repos", handlers.GetOwnerReposHandler(githubServices))
-	r.GET("/api/github/commits", handlers.GetReposCommitsHandler(githubServices))
+	redisServices := services.NewRedisCacheService()
+	r.GET("/api/github/repos", handlers.GetOwnerReposHandler(githubServices, redisServices))
+	r.GET("/api/github/commits", handlers.GetReposCommitsHandler(githubServices, redisServices))
 
 	// home page metadata
 	r.GET("api/resume", handlers.GetHomeDataHandler())

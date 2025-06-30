@@ -3,7 +3,9 @@
 #
 # Ignore media files
 internal/assets
+
 # Binaries for programs and plugins
+bin/*
 *.exe
 *.exe~
 *.dll

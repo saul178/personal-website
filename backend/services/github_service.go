@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	githubUser string = "saul178"
+	GithubUser string = "saul178"
 )
 
 func getPinnedRepos() []string {
@@ -82,7 +82,7 @@ func getRepoLanguages(ctx context.Context, s *GithubService, owner string, repos
 }
 
 func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, error) {
-	owner := githubUser
+	owner := GithubUser
 	repos := getPinnedRepos()
 	var wg sync.WaitGroup
 	var mu sync.Mutex
@@ -138,7 +138,7 @@ type RepoCommitMetadata struct {
 }
 
 func (s *GithubService) GetCommitsForRepo(ctx context.Context, repo string, limit int) (*RepoCommitMetadata, error) {
-	owner := githubUser
+	owner := GithubUser
 	opts := &github.CommitsListOptions{
 		ListOptions: github.ListOptions{PerPage: limit},
 	}

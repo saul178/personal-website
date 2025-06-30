@@ -3,7 +3,6 @@ import { RouterView } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
 </script>
 
-<!-- TODO: -->
 <template>
   <div class="bg-linear-to-b dark:from-background to-foreground min-h-screen flex flex-col font-rubik">
     <Navbar />
