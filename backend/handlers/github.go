@@ -3,7 +3,6 @@ package handlers
 import (
 	"context"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
@@ -16,7 +15,7 @@ import (
 const (
 	githubTimeout  = 5 * time.Second
 	commitMsgLimit = 3
-	cacheKey       = "repos:" + services.GithubUser
+	repoCacheKey   = "repos:" + services.GithubUser
 )
 
 // TODO: cache these requests so that it doesnt request all the time maybe redis?
@@ -27,18 +26,15 @@ func GetOwnerReposHandler(g *services.GithubService, r *services.RedisService) g
 
 		// check redis cache
 		var cachedRepos []services.RepoMetadata
-		err := r.Get(ctx, cacheKey, &cachedRepos)
+		err := r.Get(ctx, repoCacheKey, &cachedRepos)
 		if err == nil {
-			log.Println("CACHE HIT: fetching repos from redis cache..")
+			middleware.InfoLog.Println("CACHE HIT: fetching repos from redis cache..")
 			c.JSON(http.StatusOK, cachedRepos)
 			return
 		}
 
 		if err != redis.Nil {
-			// Log real Redis error
-			log.Printf("Redis error for key %s: %v\n", cacheKey, err)
-		} else {
-			log.Println("Cache MISS: key not found")
+			middleware.ErrorLog.Printf("Redis error for key %s: %v\n", repoCacheKey, err)
 		}
 
 		repoData, err := g.GetPinnedRepos(ctx)
@@ -49,8 +45,10 @@ func GetOwnerReposHandler(g *services.GithubService, r *services.RedisService) g
 		}
 
 		// set the results to the redis cache
-		log.Println("setting repo data to redis cache..")
-		_ = r.Set(ctx, cacheKey, repoData)
+		middleware.InfoLog.Println("setting repo data to redis cache..")
+		if err := r.Set(ctx, repoCacheKey, repoData); err != nil {
+			middleware.ErrorLog.Printf("failed to set repo data to redis cache. Is redis server running? %v", err)
+		}
 
 		c.JSON(http.StatusOK, repoData)
 	}
@@ -62,22 +60,19 @@ func GetReposCommitsHandler(g *services.GithubService, r *services.RedisService)
 		defer cancel()
 
 		repoName := c.Query("repo")
-		cacheKey := fmt.Sprintf("commits: %s", repoName)
+		cacheKey := fmt.Sprintf("commits:%s", repoName)
 
 		// check redis cache
 		var cachedRepoCommits services.RepoCommitMetadata
 		err := r.Get(ctx, cacheKey, &cachedRepoCommits)
 		if err == nil {
-			log.Println("Cache HIT: fetched commits from redis")
+			middleware.InfoLog.Println("Cache HIT: fetched commits from redis")
 			c.JSON(http.StatusOK, cachedRepoCommits)
 			return
 		}
 
 		if err != redis.Nil {
-			// Log real Redis error
-			log.Printf("Redis error for key %s: %v\n", cacheKey, err)
-		} else {
-			log.Println("Cache MISS: key not found")
+			middleware.ErrorLog.Printf("Redis error for key %s: %v\n", cacheKey, err)
 		}
 
 		// NOTE: we can assume repoName wont be empty sinces we are hard coding the pinned repos anyways
@@ -88,8 +83,10 @@ func GetReposCommitsHandler(g *services.GithubService, r *services.RedisService)
 			return
 		}
 
-		log.Println("setting commits to redis cache..")
-		_ = r.Set(ctx, cacheKey, commitData)
+		middleware.InfoLog.Println("CACHE MISS: setting commits to redis cache..")
+		if err := r.Set(ctx, cacheKey, commitData); err != nil {
+			middleware.ErrorLog.Printf("failed to set commits to redis cache. Is redis server running? %v", err)
+		}
 
 		c.JSON(http.StatusOK, commitData)
 	}

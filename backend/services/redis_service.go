@@ -9,9 +9,6 @@ import (
 	"github.com/saul178/personal-website/middleware"
 )
 
-// TODO: it's important that i do caching or else i will be rate limited by github since it fetches everytimt /projects
-// is visited
-
 type RedisService struct {
 	client *redis.Client
 	ttl    time.Duration
@@ -30,7 +27,7 @@ func initNewRedisClient() *redis.Client {
 
 func NewRedisCacheService() *RedisService {
 	client := initNewRedisClient()
-	ttl := time.Second * 5
+	ttl := time.Minute * 10
 
 	return &RedisService{
 		client: client,
@@ -38,6 +35,7 @@ func NewRedisCacheService() *RedisService {
 	}
 }
 
+// TODO: maybe have ttl dynamically? (ctx, key, val, ttl)
 func (r *RedisService) Set(ctx context.Context, key string, val any) error {
 	data, err := json.Marshal(val)
 	if err != nil {

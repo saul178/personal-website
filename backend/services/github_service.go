@@ -134,7 +134,6 @@ type RepoCommitMetadata struct {
 	Author    []string `json:"author,omitempty"`
 	CommitMsg []string `json:"commit_msg,omitempty"`
 	Time      []string `json:"time,omitempty"`
-	Sha       []string `json:"sha,omitempty"`
 }
 
 func (s *GithubService) GetCommitsForRepo(ctx context.Context, repo string, limit int) (*RepoCommitMetadata, error) {
@@ -153,13 +152,12 @@ func (s *GithubService) GetCommitsForRepo(ctx context.Context, repo string, limi
 		return nil, err
 	}
 
-	var commitMsg, commitAuth, commitTime, commitSha []string
+	var commitMsg, commitAuth, commitTime []string
 	for _, c := range commits {
 		if c.GetCommit() != nil {
 			commitMsg = append(commitMsg, c.GetCommit().GetMessage())
 			commitAuth = append(commitAuth, c.GetCommit().GetAuthor().GetName())
 			commitTime = append(commitTime, c.GetCommit().GetAuthor().GetDate().Format(time.DateOnly))
-			commitSha = append(commitSha, c.GetCommit().GetSHA())
 		}
 	}
 
@@ -167,7 +165,6 @@ func (s *GithubService) GetCommitsForRepo(ctx context.Context, repo string, limi
 		Author:    commitAuth,
 		CommitMsg: commitMsg,
 		Time:      commitTime,
-		Sha:       commitSha,
 	}
 
 	return metadata, nil

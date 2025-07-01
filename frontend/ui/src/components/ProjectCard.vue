@@ -64,7 +64,7 @@ const getCommitsForRepo = (repoTitle) => {
           <h3 class="dark:text-secondary font-semibold mt-2">Commit History</h3>
         </div>
         <div v-if="store.commitsByRepo[repo.title]" class="mt-2">
-          <span v-for="commit in getCommitsForRepo(repo.title)" :key="commit.sha" class="dark:text-secondary block">
+          <span v-for="commit in getCommitsForRepo(repo.title)" class="dark:text-secondary block">
             {{ commit.author }}: "{{ commit.msg }}" - {{ commit.time }}
           </span>
         </div>
