@@ -43,7 +43,6 @@ func initNewGithubClient() *github.Client {
 }
 
 // TODO: clean up the errors so that it's more readable for all the functions that use errors.new
-// TODO: look into caching so that requests arent being made every refresh: redis vs manually doing it
 func getGithubToken() (string, error) {
 	err := godotenv.Load()
 	if err != nil {
@@ -108,7 +107,6 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 				m.ErrorLog.Printf("Error fetching repo (%s) languages: %v", repoData, err)
 			}
 
-			// TODO: look into better time formats
 			metadata := RepoMetadata{
 				Title:     repository.GetName(),
 				Desc:      repository.GetDescription(),

@@ -12,11 +12,11 @@ import Navbar from '@/components/Navbar.vue'
   </div>
 </template>
 
-
 <style>
 .slide-fade-enter-active,
 .slide-fade-leave-active {
   transition: all 1.0s ease;
+  transition-delay: var(--delay, 0ms);
 }
 
 .slide-fade-enter-from {

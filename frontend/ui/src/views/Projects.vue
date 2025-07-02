@@ -40,7 +40,7 @@ onMounted(async () => {
     <div class="md:flex-1 flex flex-col space-y-6">
       <TransitionGroup name="slide-fade" tag="div" class="flex flex-col space-y-6">
         <ProjectCard v-for="(repo, i) in appendedRepos" :key="repo.title" :repo="repo"
-          :style="{ transitionDelay: `${i * 350}ms` }" />
+          :style="{ '--delay': `${i * 350}ms` }" />
       </TransitionGroup>
     </div>
   </div>

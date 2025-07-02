@@ -1,13 +1,21 @@
 package handlers
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"os"
 	"path"
+	"time"
 
 	"github.com/gin-gonic/gin"
-	m "github.com/saul178/personal-website/middleware"
+	"github.com/saul178/personal-website/middleware"
+	"github.com/saul178/personal-website/services"
+)
+
+const (
+	cacheResumeKey   = "resume:saul"
+	resumeReqTimeout = time.Second * 5
 )
 
 // TODO: these models should be separated from the handlers
@@ -30,22 +38,34 @@ type Metadata struct {
 	Skills    Skills      `json:"skills"`
 }
 
-// TODO: Look into caching so that it doesnt always read the file and do all these operations again
-func GetHomeDataHandler() gin.HandlerFunc {
+func GetHomeDataHandler(r *services.RedisService) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(c.Request.Context(), resumeReqTimeout)
+		defer cancel()
+
+		var cachedMetadata Metadata
+		if err := r.Get(ctx, cacheResumeKey, &cachedMetadata); err == nil {
+			c.JSON(http.StatusOK, cachedMetadata)
+			return
+		}
+
 		filepath := path.Join("internal", "metadata", "data.json")
 		data, err := os.ReadFile(filepath)
 		if err != nil {
-			m.ErrorLog.Printf("Error reading metadata: %v", err)
+			middleware.ErrorLog.Printf("Error reading metadata: %v", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to read json file data"})
 			return
 		}
 
 		var metadata Metadata
 		if err := json.Unmarshal(data, &metadata); err != nil {
-			m.ErrorLog.Printf("Error parsing metadata: %v", err)
+			middleware.ErrorLog.Printf("Error parsing metadata: %v", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse metadata"})
 			return
+		}
+
+		if err := r.Set(ctx, cacheResumeKey, &metadata); err != nil {
+			middleware.ErrorLog.Printf("failed to set resume data to redis cache. Is redis server running? %v", err)
 		}
 
 		c.JSON(http.StatusOK, metadata)

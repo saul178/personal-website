@@ -6,7 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// TODO: implement one for the backend this will only work for the frontend
 func CacheMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Next()

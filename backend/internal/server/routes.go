@@ -13,7 +13,7 @@ func SetupRoutes(r *gin.Engine) {
 	r.GET("/api/github/commits", handlers.GetReposCommitsHandler(githubServices, redisServices))
 
 	// home page metadata
-	r.GET("api/resume", handlers.GetHomeDataHandler())
+	r.GET("api/resume", handlers.GetHomeDataHandler(redisServices))
 
 	// serve the resume file to be downloaded
 	r.GET("api/download-resume", handlers.GetDownloadResumeHandler())

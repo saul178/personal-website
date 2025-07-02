@@ -53,23 +53,29 @@ const getCommitsForRepo = (repoTitle) => {
           </p>
         </div>
 
-        <!-- tag rows (this will probably be a vue component) -->
+        <!-- tag rows -->
         <div class="flex flex-row flex-wrap gap-4 mt-4">
           <span v-for="lang in Object.keys(repo.languages)" :key="lang"
             class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent/50">{{ lang }}</span>
         </div>
 
-        <!-- this should also be it's own component -->
+        <!-- commit rows -->
         <div class="md:flex flex-row hidden mt-6 border-t-2 dark:border-background">
           <h3 class="dark:text-secondary font-semibold mt-2">Commit History</h3>
         </div>
-        <div v-if="store.commitsByRepo[repo.title]" class="mt-2">
-          <span v-for="commit in getCommitsForRepo(repo.title)" class="dark:text-secondary block">
-            {{ commit.author }}: "{{ commit.msg }}" - {{ commit.time }}
-          </span>
-        </div>
-        <div v-else class="mt-2">
-          <span class="dark:text-secondary block italic">Loading commit history...</span>
+
+        <div class="relative">
+          <div v-if="store.commitsByRepo[repo.title]" class="mt-2">
+
+            <span v-for="commit in getCommitsForRepo(repo.title)" class="dark:text-secondary block ">
+              <span class="absolute -ml-6 mt-1.5 w-3 h-3 bg-accent/20 rounded-full group-hover:animate-ping"></span>
+              <span class="absolute -ml-6 mt-1.5 w-3 h-3 bg-accent/20 rounded-full"></span>
+              {{ commit.author }}: "{{ commit.msg }}" - {{ commit.time }}
+            </span>
+          </div>
+          <div v-else class="mt-2">
+            <span class="dark:text-secondary block italic">Loading commit history...</span>
+          </div>
         </div>
       </div>
     </div>

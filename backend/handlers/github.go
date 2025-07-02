@@ -18,7 +18,6 @@ const (
 	repoCacheKey   = "repos:" + services.GithubUser
 )
 
-// TODO: cache these requests so that it doesnt request all the time maybe redis?
 func GetOwnerReposHandler(g *services.GithubService, r *services.RedisService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(c.Request.Context(), githubTimeout)
