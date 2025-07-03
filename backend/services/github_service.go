@@ -4,13 +4,11 @@ import (
 	"context"
 	"errors"
 	"net/http"
-	"os"
 	"sync"
 	"time"
 
 	"github.com/google/go-github/v72/github"
-	"github.com/joho/godotenv"
-	m "github.com/saul178/personal-website/middleware"
+	"github.com/saul178/personal-website/middleware"
 )
 
 const (
@@ -25,36 +23,16 @@ type GithubService struct {
 	Client *github.Client
 }
 
-func NewGithubService() *GithubService {
-	client := initNewGithubClient()
-	return &GithubService{Client: client}
-}
-
-func initNewGithubClient() *github.Client {
-	ghToken, err := getGithubToken()
-	if err != nil {
-		m.WarningLog.Printf("Warning: %v.\nProceeding without an authenticated Github client.\nCertain features might not work and requests are limited.", err)
+func NewGithubService(token string) *GithubService {
+	if token == "" {
+		middleware.Logger.Info("Proceeding without an unauthenticated Github client. Certain features might not work and requests are limited to 60 requests.")
 		unauthClient := github.NewClient(nil)
-		return unauthClient
+		return &GithubService{Client: unauthClient}
 	}
 
-	client := github.NewClient(nil).WithAuthToken(ghToken)
-	return client
-}
-
-// TODO: clean up the errors so that it's more readable for all the functions that use errors.new
-func getGithubToken() (string, error) {
-	err := godotenv.Load()
-	if err != nil {
-		return "", errors.New("failed to load .env file: Github api will not function correctly without it.")
-	}
-
-	ghToken := os.Getenv("GITHUB_TOKEN")
-	// TODO: this check feels useless, decide to keep or get rid
-	if ghToken == "" {
-		return "", errors.New("GITHUB_TOKEN is empty: Github api will not function correctly without it.")
-	}
-	return ghToken, nil
+	middleware.Logger.Info("proceeding with an authenticated github user")
+	client := github.NewClient(nil).WithAuthToken(token)
+	return &GithubService{Client: client}
 }
 
 type RepoMetadata struct {
@@ -72,7 +50,7 @@ func getRepoLanguages(ctx context.Context, s *GithubService, owner string, repos
 	languages := make(map[string]int)
 	repository, _, err := s.Client.Repositories.ListLanguages(ctx, owner, repos)
 	if err != nil {
-		m.ErrorLog.Printf("Error fetching repo (%s) languages: %v", repos, err)
+		middleware.Logger.Error("Error fetching repo languages", "repo", repos, "err", err)
 		return nil, err
 	}
 	languages = repository
@@ -94,17 +72,17 @@ func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, err
 
 			repository, resp, err := s.Client.Repositories.Get(ctx, owner, repoData)
 			if err != nil {
-				m.ErrorLog.Printf("Error fetching repo (%s): %v", repoData, err)
+				middleware.Logger.Error("Error fetching repo", "repo data", repoData, "err", err)
 				return
 			}
 			if resp.Response.StatusCode != http.StatusOK {
-				m.ErrorLog.Printf("GET request for repo (%s) responded with %v", repoData, resp.Response.StatusCode)
+				middleware.Logger.Error("GET request for repo", "repo data", repoData, "err", resp.Response.StatusCode)
 				return
 			}
 
 			repoLanguages, err := getRepoLanguages(ctx, s, owner, repoData)
 			if err != nil {
-				m.ErrorLog.Printf("Error fetching repo (%s) languages: %v", repoData, err)
+				middleware.Logger.Error("Error fetching repo languages", "repo data", repoData, "err", err)
 			}
 
 			metadata := RepoMetadata{
@@ -146,7 +124,7 @@ func (s *GithubService) GetCommitsForRepo(ctx context.Context, repo string, limi
 	}
 
 	if resp.Response.StatusCode != http.StatusOK {
-		m.ErrorLog.Printf("GET request for repo commits (%s) responded with %v", repo, resp.Response.StatusCode)
+		middleware.Logger.Error("GET request for repo commits failed", "repo", repo, "err", resp.Response.StatusCode)
 		return nil, err
 	}
 

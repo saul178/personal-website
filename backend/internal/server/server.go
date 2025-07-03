@@ -2,17 +2,17 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/saul178/personal-website/config"
 	"github.com/saul178/personal-website/middleware"
 )
 
-func NewServer() *gin.Engine {
-	middleware.InfoLog.Println("initializing gin server")
+func NewServer(cfg *config.Config) *gin.Engine {
+	middleware.Logger.Info("initializing gin server", "port", 8080)
 	router := gin.Default()
 
 	// can have middleware here to be used
 	// like a logger, recovery, etc.
-	middleware.InfoLog.Println("initializing cors middleware")
-	router.Use(middleware.CORSMiddleware())
+	router.Use(middleware.CORSMiddleware(cfg.Domain.DomainName))
 	router.Use(middleware.CacheMiddleware())
 
 	return router

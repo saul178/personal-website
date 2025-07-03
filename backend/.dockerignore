@@ -1,0 +1,7 @@
+**/test
+.git
+.env
+.env.*
+node_modules
+*.md
+.gitignore

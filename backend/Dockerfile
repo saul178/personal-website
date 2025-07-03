@@ -1,4 +1,5 @@
-FROM golang:latest
+# Stage 1: Build
+FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
 
@@ -7,7 +8,27 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o bin/server ./cmd/api
+RUN go build -o server ./cmd/api
+
+# Stage 2: Runtime
+FROM alpine:latest
+
+# Optional: Add a non-root user (recommended for security)
+RUN adduser -D -g '' appuser
+
+WORKDIR /app
+
+# Copy compiled binary
+COPY --from=builder /app/server .
+
+# Copy only the required runtime assets
+COPY --from=builder /app/internal/assets /app/internal/assets
+COPY --from=builder /app/internal/metadata /app/internal/metadata
+
 EXPOSE 8080
 
-CMD ["./bin/server"]
+# Switch to non-root user and give permission to app
+RUN chown -R appuser:appuser /app
+USER appuser
+
+CMD ["./server"]

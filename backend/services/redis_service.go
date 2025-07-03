@@ -14,19 +14,13 @@ type RedisService struct {
 	ttl    time.Duration
 }
 
-func initNewRedisClient() *redis.Client {
+func NewRedisCacheService(addr string, passwd string) *RedisService {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Password: "",
+		Addr:     addr,
+		Password: passwd,
 		DB:       0,
 		Protocol: 3,
 	})
-
-	return client
-}
-
-func NewRedisCacheService() *RedisService {
-	client := initNewRedisClient()
 	ttl := time.Minute * 10
 
 	return &RedisService{
@@ -39,7 +33,7 @@ func NewRedisCacheService() *RedisService {
 func (r *RedisService) Set(ctx context.Context, key string, val any) error {
 	data, err := json.Marshal(val)
 	if err != nil {
-		middleware.ErrorLog.Printf("failed to marshall json into the cache: %v", err)
+		middleware.Logger.Error("failed to marshall json into the cache", "err", err)
 		return err
 	}
 	return r.client.Set(ctx, key, data, r.ttl).Err()
@@ -48,7 +42,7 @@ func (r *RedisService) Set(ctx context.Context, key string, val any) error {
 func (r *RedisService) Get(ctx context.Context, key string, dest any) error {
 	val, err := r.client.Get(ctx, key).Result()
 	if err != nil {
-		middleware.ErrorLog.Printf("failed to Get cached data: %v", err)
+		middleware.Logger.Error("failed to Get cached data", "err", err)
 		return err
 	}
 	return json.Unmarshal([]byte(val), dest)
