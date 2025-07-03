@@ -29,3 +29,7 @@ coverage
 
 *.tsbuildinfo
 *.txt
+
+.env
+.env.*
+nginx.conf

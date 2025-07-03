@@ -6,7 +6,7 @@ const toggleDark = useToggle(isDark)
 </script>
 
 <template>
-  <button @click="toggleDark()" class="py-2 px-3 dark:hover:text-accent hover:text-accent transition-colors">
+  <button @click="toggleDark()" class="px-4 dark:hover:text-accent hover:text-accent transition-colors">
     <span v-if="isDark">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-6">

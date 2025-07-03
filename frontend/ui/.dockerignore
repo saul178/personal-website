@@ -1,0 +1,18 @@
+# General
+.git
+.gitignore
+*.md
+*.log
+
+# Env
+.env
+.env.*
+
+# Build & dependencies
+node_modules
+dist
+
+# Tests
+**/test
+**/tests
+coverage
