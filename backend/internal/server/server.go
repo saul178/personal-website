@@ -15,5 +15,6 @@ func NewServer(cfg *config.Config) *gin.Engine {
 	router.Use(middleware.CORSMiddleware(cfg.Domain.DomainName))
 	router.Use(middleware.CacheMiddleware())
 
+	// router.TrustedPlatform = gin.PlatformCloudflare
 	return router
 }
