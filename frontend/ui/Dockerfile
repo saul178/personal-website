@@ -1,22 +1,14 @@
-# Stage 1 - Build
-FROM node:24 AS builder
+# build stage
+FROM node:24-alpine AS build-stage
 WORKDIR /app
-
-# Copy files into container
+COPY package*.json ./
+RUN npm install
 COPY . .
 
-# Install deps and build
-RUN npm install
 RUN npm run build
 
-# Stage 2 - Serve with nginx
-FROM nginx:alpine
-
-# Copy build output to nginx's html dir
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Optional: custom nginx config
-COPY nginx.conf /etc/nginx/nginx.conf
-
+# production stage
+FROM nginx:stable-alpine AS production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

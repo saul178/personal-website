@@ -21,6 +21,6 @@ func SetupRoutes(r *gin.Engine, cfg *config.Config) {
 	// serve the resume file to be downloaded
 	r.GET("/api/download-resume", handlers.GetDownloadResumeHandler())
 
-	// TODO: serve music files to be streamed on personal page
+	// TODO: serve music files to be streamed on personal page through a json pointing to the files.
 	// r.GET("api/music", handlers.GetMusicDataHandler())
 }

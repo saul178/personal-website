@@ -42,7 +42,7 @@ func (r *RedisService) Set(ctx context.Context, key string, val any) error {
 func (r *RedisService) Get(ctx context.Context, key string, dest any) error {
 	val, err := r.client.Get(ctx, key).Result()
 	if err != nil {
-		middleware.Logger.Error("failed to Get cached data", "err", err)
+		middleware.Logger.Warn("failed to Get cached data", "err", err)
 		return err
 	}
 	return json.Unmarshal([]byte(val), dest)

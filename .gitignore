@@ -1,3 +1,4 @@
-nginx.conf
+nginx-dev.conf
+nginx-prod.conf
 .env
 .env.*

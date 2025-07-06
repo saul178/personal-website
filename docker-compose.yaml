@@ -1,0 +1,61 @@
+services:
+  redis:
+    image: redis
+    container_name: redis-server
+    restart: always
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    restart: always
+    env_file:
+      - ./backend/.env.dev
+    # env_file:
+    #   - ./backend/.env.prod
+    depends_on:
+      - redis
+    ports:
+      - 8080:8080
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend/ui
+      dockerfile: Dockerfile
+    container_name: frontend
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx-dev.conf:/etc/nginx/nginx.conf
+      # - ./nginx-prod.conf:/etc/nginx/nginx.conf
+      - ./frontend/ui/dist:/usr/share/nginx/html
+    networks:
+      - app-network
+
+volumes:
+  redis_data:
+
+
+networks:
+  app-network:
+    driver: bridge
