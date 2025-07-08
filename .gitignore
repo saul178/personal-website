@@ -1,4 +1,4 @@
 nginx-dev.conf
-nginx-prod.conf
 .env
 .env.*
+/certs
