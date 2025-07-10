@@ -33,7 +33,7 @@ services:
     depends_on:
       - backend
     restart: always
-    expose:
+    ports:
       - "127.0.0.1:8081:3000"
     networks:
       - app-network
