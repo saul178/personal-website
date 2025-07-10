@@ -33,27 +33,10 @@ services:
     depends_on:
       - backend
     restart: always
-    ports:
-      - 80:80
+    expose:
+      - "3000"
     networks:
       - app-network
-
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    restart: always
-    depends_on:
-      - frontend
-      - backend
-    ports:
-      - 3000:3000
-    volumes:
-      # - ./nginx-dev.conf:/etc/nginx/nginx-dev.conf
-      - ./nginx-prod.conf:/etc/nginx/nginx-prod.conf
-      - ./frontend/ui/dist:/usr/share/nginx/html
-    networks:
-      - app-network
-
 volumes:
   redis_data:
 
