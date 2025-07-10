@@ -33,7 +33,7 @@ onMounted(() => {
           hover:shadow-accent/20">
           <div class="mt-2">
             <h1 class="text-2xl font-bold dark:text-primary text-center">Welcome to my site!</h1>
-            <p class="mt-2 dark:text-secondary text-left">
+            <p class="mt-2 dark:text-secondary/90 text-shadow-sm text-left">
               My name is Saul Gonzalez, at a young age I have always loved messing with computers and
               being the families in house IT person. In my
               journey to complete my Computer Science degree, I rediscovered a passion that I lost through time. I fell

@@ -30,9 +30,9 @@ const getCommitsForRepo = (repoTitle) => {
   <div
     class="flex flex-col md:flex-row group hover:-translate-y-1 bg-foreground hover:bg-foreground/60 backdrop-blur-sm p-6 rounded-2xl border border-accent/20 transition-all duration-300 shadow-lg hover:shadow-accent/20">
     <!-- project image here -->
-    <img
-      class="md:w-80 h-48 mb-4 md:mr-4 rounded-md shadow-lg object-cover transition duration-500 ease-in-out opacity-25 group-hover:opacity-100"
-      :src="getRepoImg(repo.title)" alt="Project Image">
+    <img class="md:w-80 h-48 mb-4 md:mr-4 rounded-md shadow-lg object-cover md:transition
+      md:duration-500 md:ease-in-out md:opacity-25 md:group-hover:opacity-100" :src="getRepoImg(repo.title)"
+      alt="Project Image">
 
     <div class="flex flex-col justify-between">
       <div>
@@ -43,12 +43,12 @@ const getCommitsForRepo = (repoTitle) => {
           </a>
         </h3>
         <div class="flex flex-row gap-4 mt-1 mb-2">
-          <h3 class="text-sm dark:text-primary">Created at - {{ repo.created_at }}</h3>
-          <h3 class="text-sm dark:text-primary">Updated at - {{ repo.updated_at }}</h3>
+          <h3 class="text-sm dark:text-primary/90">Created at - {{ repo.created_at }}</h3>
+          <h3 class="text-sm dark:text-primary/90">Updated at - {{ repo.updated_at }}</h3>
         </div>
         <div>
           <h2 class="text-sm font-semibold dark:text-primary">Description</h2>
-          <p class="mt-2 dark:text-secondary">
+          <p class="mt-2 dark:text-secondary/90">
             {{ repo.desc || 'No description available' }}
           </p>
         </div>
@@ -64,7 +64,7 @@ const getCommitsForRepo = (repoTitle) => {
           <h3 class="dark:text-secondary font-semibold mt-2">Commit History</h3>
         </div>
 
-        <div class="relative">
+        <div class="relative hidden md:block">
           <div v-if="store.commitsByRepo[repo.title]" class="mt-2">
 
             <span v-for="commit in getCommitsForRepo(repo.title)" class="dark:text-secondary block ">
