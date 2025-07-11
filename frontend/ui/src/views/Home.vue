@@ -1,6 +1,4 @@
 <script setup>
-// TODO: map the font icons from fontawesome so that we can for loop and just use one tage for all
-// the skills
 import { useResumeStore } from '@/stores/ResumeStore';
 import { computed, onMounted } from 'vue';
 
@@ -32,8 +30,8 @@ onMounted(() => {
           rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
           hover:shadow-accent/20">
           <div class="mt-2">
-            <h1 class="text-2xl font-bold dark:text-primary text-center">Welcome to my site!</h1>
-            <p class="mt-2 dark:text-secondary/90 text-shadow-sm text-left">
+            <h1 class="text-2xl font-bold dark:text-primary text-center text-shadow-sm">Welcome to my site!</h1>
+            <p class="mt-2 dark:text-secondary/90 text-shadow-2xs text-left">
               My name is Saul Gonzalez, at a young age I have always loved messing with computers and
               being the families in house IT person. In my
               journey to complete my Computer Science degree, I rediscovered a passion that I lost through time. I fell
@@ -59,7 +57,7 @@ onMounted(() => {
               <font-awesome-icon :icon="['fas', 'graduation-cap']" />
             </div>
             <div>
-              <h2 class="text-xl font-bold dark:text-primary">Education</h2>
+              <h2 class="text-xl font-bold dark:text-primary text-shadow-sm">Education</h2>
             </div>
           </div>
           <!-- education list -->
@@ -67,18 +65,18 @@ onMounted(() => {
             <div v-for="(school, i) in getEducation" :key="i" class="relative mt-2">
               <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full group-hover:animate-ping"></span>
               <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full"></span>
-              <h3 class="text-xl font-semibold dark:text-primary">{{ school.degree }}</h3>
-              <p class="text-sm dark:text-secondary">{{ school.school }} ({{ school.date_completed }})</p>
+              <h3 class="text-xl font-semibold dark:text-primary text-shadow-sm">{{ school.degree }}</h3>
+              <p class="text-sm dark:text-secondary/90 text-shadow-sm">{{ school.school }} ({{ school.date_completed
+              }})</p>
             </div>
           </div>
         </div>
 
-        <!-- TODO: move contact card to the bottom when on mobile -->
         <div class="flex justify-center items-center">
           <div class="group bg-foreground hover:bg-foreground/60 backdrop-blur-sm
           rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
           hover:shadow-accent/20">
-            <div class="dark:text-primary text-2xl font-semibold text-center mb-2">Connect with me</div>
+            <div class="dark:text-primary text-2xl font-semibold text-center mb-2">Connect With Me</div>
             <div class="flex justify-center gap-4">
               <div class="flex items-center justify-center hover:scale-110
               transition-transform">
@@ -119,7 +117,7 @@ onMounted(() => {
         <div class="flex flex-col space-y-6">
           <div class="border-b dark:border-b-accent/20">
             <div class="bg-gradient-to-r dark:from-primary to-accent bg-clip-text text-transparent
-            text-4xl text-center font-semibold mb-3">
+            text-4xl text-center font-semibold mb-3 text-shadow-md">
               My Skills
             </div>
           </div>
@@ -127,14 +125,14 @@ onMounted(() => {
           rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
           hover:shadow-accent/20">
             <div class="flex items-start gap-4">
-              <div class="hidden md:flex flex-col items-center justify-center group-hover:scale-110
+              <div class="hidden w-16 h-16 bg-accent/10 rounded-full md:flex flex-col items-center justify-center group-hover:scale-110
               transition-transform pt-2 px-3">
                 <font-awesome-icon :icon="['fas', 'desktop']" class="dark:text-primary text-4xl mb-2" />
               </div>
               <div class="flex flex-col gap-2 items-center md:items-start">
                 <div>
                   <div class="bg-gradient-to-r dark:from-primary to-accent bg-clip-text text-transparent text-3xl font-semibold text-center
-                  md:text-start">OS's
+                  md:text-start text-shadow-sm">OS's
                   </div>
                   <div class="bg-gradient-to-r dark:from-primary to-accent bg-clip-text text-transparent text-xl text-center
                   md:text-start">Linux lover, but proficient with these as well
@@ -146,17 +144,17 @@ onMounted(() => {
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                   border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'linux']" class="dark:text-primary text-4xl" />
-                    <span class="dark:text-primary text-lg">{{ getSkills.os.linux }}</span>
+                    <span class="dark:text-primary/90 text-lg">{{ getSkills.os.linux }}</span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                   border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'windows']" class="dark:text-primary text-4xl" alt="Windows" />
-                    <span class="dark:text-primary text-lg"> {{ getSkills.os.windows }} </span>
+                    <span class="dark:text-primary/90 text-lg"> {{ getSkills.os.windows }} </span>
                   </span>
                   <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                   border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                     <font-awesome-icon :icon="['fab', 'apple']" class="dark:text-primary text-4xl" alt="Apple" />
-                    <span class="dark:text-primary text-lg"> {{ getSkills.os.apple }}</span>
+                    <span class="dark:text-primary/90 text-lg"> {{ getSkills.os.apple }}</span>
                   </span>
                 </div>
               </div>
@@ -169,14 +167,14 @@ onMounted(() => {
             backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-accent/20 transition-all
             duration-300 hover:shadow-accent/20">
               <div class="flex items-start gap-4">
-                <div class="hidden md:flex flex-col items-center justify-center group-hover:scale-110
+                <div class="hidden w-16 h-16 bg-accent/10 rounded-full md:flex flex-col items-center justify-center group-hover:scale-110
                 transition-transform pt-2 px-3">
                   <font-awesome-icon :icon="['fas', 'code']" class="dark:text-primary text-4xl mb-2" />
                 </div>
                 <div class="flex flex-col gap-2 items-center md:items-start">
                   <div>
                     <div class="bg-gradient-to-r dark:from-primary to-accent bg-clip-text text-transparent text-3xl font-semibold text-center
-                  md:text-start">Languages
+                  md:text-start text-shadow-sm">Languages
                     </div>
                     <div class="bg-gradient-to-r dark:from-secondary to-accent bg-clip-text text-transparent text-xl text-center
                   md:text-start">Proficient with these languages
@@ -187,27 +185,27 @@ onMounted(() => {
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'golang']" class="dark:text-primary text-4xl" alt="Golang" />
-                      <span class="dark:text-primary text-lg"> {{ getSkills.languages.golang }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.languages.golang }} </span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'python']" class="dark:text-primary text-4xl" alt="Python" />
-                      <span class="dark:text-primary text-lg"> {{ getSkills.languages.python }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.languages.python }} </span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'java']" class="dark:text-primary text-4xl" alt="Java" />
-                      <span class="dark:text-primary text-lg"> {{ getSkills.languages.java }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.languages.java }} </span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'js']" class="dark:text-primary text-4xl" alt="JavaScript" />
-                      <span class="dark:text-primary text-lg"> {{ getSkills.languages.javascript }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.languages.javascript }} </span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                     border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'html5']" class="dark:text-primary text-4xl" alt="HTML" />
-                      <span class="dark:text-primary text-lg">{{ getSkills.languages.html }}</span>
+                      <span class="dark:text-primary/90 text-lg">{{ getSkills.languages.html }}</span>
                     </span>
                   </div>
                 </div>
@@ -221,7 +219,7 @@ onMounted(() => {
             backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-accent/20 transition-all
             duration-300 hover:shadow-accent/20">
               <div class="flex items-start gap-4">
-                <div class="hidden md:flex flex-col items-center justify-center group-hover:scale-110
+                <div class="hidden w-16 h-16 bg-accent/10 rounded-full md:flex flex-col items-center justify-center group-hover:scale-110
                 transition-transform pt-2 px-3">
                   <font-awesome-icon :icon="['fas', 'screwdriver-wrench']" class="dark:text-primary
                   text-4xl mb-2" alt="Tools" />
@@ -229,7 +227,7 @@ onMounted(() => {
                 <div class="flex flex-col gap-2 items-center md:items-start">
                   <div>
                     <div class="bg-gradient-to-r dark:from-primary to-accent bg-clip-text text-transparent text-3xl font-semibold text-center
-                  md:text-start">Tools
+                  md:text-start text-shadow-sm">Tools
                     </div>
                     <div class="bg-gradient-to-r dark:from-secondary to-accent bg-clip-text text-transparent text-xl text-center
                   md:text-start">Proficient with these tools
@@ -240,17 +238,17 @@ onMounted(() => {
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'docker']" class="dark:text-primary text-4xl" alt="docker" />
-                      <span class="dark:text-primary text-lg"> {{ getSkills.tools.docker }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.tools.docker }} </span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'git-alt']" class="dark:text-primary text-4xl" alt="Git" />
-                      <span class="dark:text-primary text-lg"> {{ getSkills.tools.git }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.tools.git }} </span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'github']" class="dark:text-primary text-4xl" alt="Github" />
-                      <span class="dark:text-primary text-lg"> {{ getSkills.tools.github }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.tools.github }} </span>
                     </span>
                   </div>
                 </div>
@@ -264,7 +262,7 @@ onMounted(() => {
             backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-accent/20 transition-all
             duration-300 hover:shadow-accent/20">
               <div class="flex items-start gap-4">
-                <div class="hidden md:flex flex-col items-center justify-center group-hover:scale-110
+                <div class="hidden md:w-16 md:h-16 md:bg-accent/10 md:rounded-full md:flex flex-col items-center justify-center group-hover:scale-110
                 transition-transform pt-2 px-3">
                   <font-awesome-icon :icon="['fas', 'layer-group']" class="dark:text-primary text-4xl"
                     alt="Frameworks" />
@@ -272,7 +270,7 @@ onMounted(() => {
                 <div class="flex flex-col gap-2 items-center md:items-start">
                   <div>
                     <div class="bg-gradient-to-r dark:from-primary to-accent bg-clip-text text-transparent text-3xl font-semibold text-center
-                  md:text-start">Frameworks
+                  md:text-start text-shadow-sm">Frameworks
                     </div>
                     <div class="bg-gradient-to-r dark:from-secondary to-accent bg-clip-text text-transparent text-xl text-center
                   md:text-start">Proficient with these frameworks
@@ -283,7 +281,7 @@ onMounted(() => {
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'vuejs']" class="dark:text-primary text-4xl" alt="Vuejs" />
-                      <span class="dark:text-primary text-lg"> {{ getSkills.frameworks.vue }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.frameworks.vue }} </span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
@@ -297,7 +295,7 @@ onMounted(() => {
                             stroke="currentColor" stroke-linejoin="round"></path>
                         </g>
                       </svg>
-                      <span class="dark:text-primary text-lg"> {{ getSkills.frameworks.tailwind }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.frameworks.tailwind }} </span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
@@ -317,12 +315,12 @@ onMounted(() => {
                           </path>
                         </g>
                       </svg>
-                      <span class="dark:text-primary text-lg"> {{ getSkills.frameworks.django }} </span>
+                      <span class="dark:text-primary/90 text-lg"> {{ getSkills.frameworks.django }} </span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                       border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
                       <font-awesome-icon :icon="['fab', 'bootstrap']" class="dark:text-primary text-4xl" />
-                      <span class="dark:text-primary text-lg">{{ getSkills.frameworks.bootstrap }}</span>
+                      <span class="dark:text-primary/90 text-lg">{{ getSkills.frameworks.bootstrap }}</span>
                     </span>
                   </div>
                 </div>
@@ -336,7 +334,7 @@ onMounted(() => {
             backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-accent/20 transition-all
             duration-300 hover:shadow-accent/20">
               <div class="flex items-start gap-4">
-                <div class="hidden md:flex flex-col items-center justify-center group-hover:scale-110
+                <div class="hidden w-16 h-16 bg-accent/10 rounded-full md:flex flex-col items-center justify-center group-hover:scale-110
                 transition-transform pt-2 px-3">
                   <font-awesome-icon :icon="['fas', 'database']" class="dark:text-primary
                   text-4xl" alt="Database" />
@@ -344,7 +342,7 @@ onMounted(() => {
                 <div class="flex flex-col gap-2 items-center md:items-start">
                   <div>
                     <div class="bg-gradient-to-r dark:from-primary to-accent bg-clip-text text-transparent text-3xl font-semibold text-center
-                  md:text-start">Databases
+                  md:text-start text-shadow-sm">Databases
                     </div>
                     <div class="bg-gradient-to-r dark:from-secondary to-accent bg-clip-text text-transparent text-xl text-center
                   md:text-start">Proficient with these relational databases
@@ -364,7 +362,7 @@ onMounted(() => {
                           </path>
                         </g>
                       </svg>
-                      <span class="dark:text-primary block mt-1"> {{ getSkills.databases.mysql }}</span>
+                      <span class="dark:text-primary/90 block mt-1"> {{ getSkills.databases.mysql }}</span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                         border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
@@ -378,7 +376,7 @@ onMounted(() => {
                           </path>
                         </g>
                       </svg>
-                      <span class="dark:text-primary block mt-1"> {{ getSkills.databases.postgresql }}</span>
+                      <span class="dark:text-primary/90 block mt-1"> {{ getSkills.databases.postgresql }}</span>
                     </span>
                     <span class="flex items-center px-8 py-2 dark:bg-background/60 rounded-xl dark:text-primary border
                         border-accent/20 hover:border-accent/50 transition-colors text-center gap-2 mt-2">
@@ -393,7 +391,7 @@ onMounted(() => {
                           </path>
                         </g>
                       </svg>
-                      <span class="dark:text-primary block mt-1"> {{ getSkills.databases.sqlite }}</span>
+                      <span class="dark:text-primary/90 block mt-1"> {{ getSkills.databases.sqlite }}</span>
                     </span>
                   </div>
                 </div>

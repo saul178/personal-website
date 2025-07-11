@@ -10,7 +10,7 @@ const items = [
 
 <template>
   <RouterLink v-for="(item) in items" :key="item.to" :to="item.to"
-    class="py-2 px-3 block border-b-1 border-transparent dark:hover:text-accent transition-colors"
+    class="py-2 px-3 block border-b-1 border-transparent dark:hover:text-accent transition-colors text-shadow-sm"
     active-class="dark:border-accent dark:text-accent" exact>
     {{ item.label }}
   </RouterLink>

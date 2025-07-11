@@ -36,45 +36,45 @@ const getCommitsForRepo = (repoTitle) => {
 
     <div class="flex flex-col justify-between">
       <div>
-        <h3 class="text-xl font-semibold dark:text-primary capitalize
+        <h3 class="text-xl font-semibold dark:text-primary text-shadow-sm capitalize
                 hover:text-accent/60">
           <a :href="repo.url">
             {{ repo.title.replace(/-/g, ' ') }}
           </a>
         </h3>
-        <div class="flex flex-row gap-4 mt-1 mb-2">
-          <h3 class="text-sm dark:text-primary/90">Created at - {{ repo.created_at }}</h3>
-          <h3 class="text-sm dark:text-primary/90">Updated at - {{ repo.updated_at }}</h3>
+        <div class="hidden md:flex md:flex-row md:gap-4 md:mt-1 md:mb-2">
+          <h3 class="text-sm dark:text-primary/90">Created at - {{ repo.created_at.replace(/-/g, '/') }}</h3>
+          <h3 class="text-sm dark:text-primary/90">Updated at - {{ repo.updated_at.replace(/-/g, '/') }}</h3>
         </div>
         <div>
-          <h2 class="text-sm font-semibold dark:text-primary">Description</h2>
-          <p class="mt-2 dark:text-secondary/90">
+          <h2 class="text-sm font-semibold dark:text-primary text-shadow-sm mt-2">Description</h2>
+          <p class="mt-1 dark:text-secondary/90">
             {{ repo.desc || 'No description available' }}
           </p>
         </div>
 
         <!-- tag rows -->
         <div class="flex flex-row flex-wrap gap-4 mt-4">
-          <span v-for="lang in Object.keys(repo.languages)" :key="lang"
-            class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent/50">{{ lang }}</span>
+          <span v-for="lang in Object.keys(repo.languages)" :key="lang" class="dark:text-primary px-2 py-1 rounded-full text-sm border-2 border-accent/50
+            text-shadow-sm">{{ lang }}</span>
         </div>
 
         <!-- commit rows -->
-        <div class="md:flex flex-row hidden mt-6 border-t-2 dark:border-background">
-          <h3 class="dark:text-secondary font-semibold mt-2">Commit History</h3>
+        <div class="md:flex flex-row hidden mt-5 border-t-2 dark:border-background">
+          <h3 class="dark:text-primary font-semibold mt-2 text-shadow-sm">Commit History</h3>
         </div>
 
         <div class="relative hidden md:block">
           <div v-if="store.commitsByRepo[repo.title]" class="mt-2">
-
-            <span v-for="commit in getCommitsForRepo(repo.title)" class="dark:text-secondary block ">
+            <span v-for="commit in getCommitsForRepo(repo.title)" class="dark:text-secondary/90
+              block md:ml-6 ">
               <span class="absolute -ml-6 mt-1.5 w-3 h-3 bg-accent/20 rounded-full group-hover:animate-ping"></span>
               <span class="absolute -ml-6 mt-1.5 w-3 h-3 bg-accent/20 rounded-full"></span>
-              {{ commit.author }}: "{{ commit.msg }}" - {{ commit.time }}
+              {{ commit.author }}: "{{ commit.msg }}" - {{ commit.time.replace(/-/g, '/') }}
             </span>
           </div>
           <div v-else class="mt-2">
-            <span class="dark:text-secondary block italic">Loading commit history...</span>
+            <span class="dark:text-secondary/90 text-shadow-sm block italic">Loading commit history...</span>
           </div>
         </div>
       </div>

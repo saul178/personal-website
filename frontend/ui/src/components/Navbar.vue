@@ -16,7 +16,7 @@ const toggleMobileMenu = () => {
 
       <!-- home logo -->
       <div class="flex md:w-auto w-full px-4">
-        <RouterLink to="/" class="py-5 px-2 flex-1 md:flex-col dark:hover:text-accent">
+        <RouterLink to="/" class="py-5 px-2 flex-1 md:flex-col dark:hover:text-accent/60">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -25,7 +25,7 @@ const toggleMobileMenu = () => {
         </RouterLink>
 
         <!-- burger icon into X icon -->
-        <button @click="toggleMobileMenu" class="md:hidden cursor-pointer mobile-menu-button">
+        <button @click="toggleMobileMenu" class="md:hidden mobile-menu-button">
           <span v-if="!isMobileMenuOpen">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
@@ -45,14 +45,14 @@ const toggleMobileMenu = () => {
       <div class="hidden md:flex items-center justify-center space-x-4">
         <NavLinks />
       </div>
-      <div class="hidden md:flex">
+      <div class="hidden md:flex mr-2">
         <ThemeToggle />
       </div>
     </div>
 
     <!-- mobile nav links -->
     <div v-if="isMobileMenuOpen" class="md:hidden flex flex-col px-4 pb-4 space-y-2
-      bg-gradient-to-b dark:from-foreground to-background ">
+      bg-foreground">
       <NavLinks />
       <ThemeToggle mobile="true" />
     </div>
