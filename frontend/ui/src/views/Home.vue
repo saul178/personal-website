@@ -25,31 +25,38 @@ onMounted(() => {
             mx-auto shadow-xl" />
         </div>
 
-        <!-- TODO: replace the paragraph with something else maybe talk about why you did the site -->
         <div class="group bg-foreground hover:bg-foreground/60 backdrop-blur-sm
           rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
           hover:shadow-accent/20">
           <div class="mt-2">
-            <h1 class="text-2xl font-bold dark:text-primary text-center text-shadow-sm">Welcome to my site!</h1>
+            <h1 class="text-2xl font-bold dark:text-primary text-center text-shadow-sm">Hi, I'm Saul Gonzalez</h1>
             <p class="mt-2 dark:text-secondary/90 text-shadow-2xs text-left">
-              My name is Saul Gonzalez, at a young age I have always loved messing with computers and
-              being the families in house IT person. In my
-              journey to complete my Computer Science degree, I rediscovered a passion that I lost through time. I fell
-              in
-              love with building computers, programming slowly became a new passion, and I fell in love with Linux. I
-              always strive to break my skill cap by learning from others or challenging myself to learn new things.
+              I'm a recent Computer Science graduate from Metropolitan State University of
+              Denver, and this is my personal website. The tech stack consists of Vue.js, Tailwind CSS, and a Golang
+              backend powered by the Gin Framework. I've deployed this project on my personal server using
+              Nginx Proxy Manager and Docker to host all the services used.
               <br>
               <br>
-              I have worked in retail for years, while I appreciate and value all the skills that I have learned from my
-              job. I always knew that I could do more for myself and strive for higher levels. The completion of my
-              degree
-              is proof that I can do anything I set my mind to and I plan to reach higher levels through out my journey
-              in
-              life.
+              I've built this not only to showcase what I'm capable of, but also to explore and answer many of the
+              questions I've had about development: what is a backend? How does the frontend communicate with it? How
+              do HTML and CSS work together? How does the world wide web work? What does it take to actually release
+              and self host a product to the cold outskirts of the internet? And many more. Feel free to explore my
+              other projects, I made it so that it actively shows what I'm working on.
+              <br>
+              <br>
+              As for why I chose the tools that I did for this project, it's honestly really simple. I'm a big fan of
+              Golang, Vue seemed like a good fit for a project of this size, and Tailwind CSS just looked fun to learn.
+              There were plenty of ups and downs building this, but I plan to maintain this site and eventually turn it
+              into more than just a place to show off my resume.
+              <br>
+              <br>
+              You might notice the personal section is currently empty, but that's where I plan to share more about my
+              personal life outside of tech.
             </p>
           </div>
         </div>
 
+        <!-- education card -->
         <div
           class="group bg-foreground/50 backdrop-blur-sm border border-accent/20 rounded-2xl shadow-lg p-6 transition-transform hover:shadow-accent/20">
           <div class="flex items-center gap-4 mb-2">
@@ -60,7 +67,6 @@ onMounted(() => {
               <h2 class="text-xl font-bold dark:text-primary text-shadow-sm">Education</h2>
             </div>
           </div>
-          <!-- education list -->
           <div class="relative border-l-2 border-background group-hover:border-accent/20 pl-12 space-y-4">
             <div v-for="(school, i) in getEducation" :key="i" class="relative mt-2">
               <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full group-hover:animate-ping"></span>
@@ -72,6 +78,7 @@ onMounted(() => {
           </div>
         </div>
 
+        <!-- contact card -->
         <div class="flex justify-center items-center">
           <div class="group bg-foreground hover:bg-foreground/60 backdrop-blur-sm
           rounded-2xl shadow-lg p-6 border border-accent/20 transition-all duration-300
