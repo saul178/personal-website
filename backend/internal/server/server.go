@@ -13,7 +13,7 @@ func NewServer(cfg *config.Config) *gin.Engine {
 	// this sets cloudflares trusted ips?
 	router.TrustedPlatform = gin.PlatformCloudflare
 
-	// for nginx to be trusted
+	// TODO: set cloudflares ipranges here to be trusted
 	router.SetTrustedProxies([]string{"127.0.0.1", "::1"})
 
 	// can have middleware here to be used
