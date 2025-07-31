@@ -71,7 +71,11 @@ func GetHomeDataHandler(r *services.RedisService) gin.HandlerFunc {
 		}
 
 		if err := r.Set(ctx, cacheResumeKey, &metadata); err != nil {
-			middleware.Logger.Error("Failed to cache resume metadata to Redis Server, is Redis server running?", "key", cacheResumeKey, "err", err)
+			middleware.Logger.Error(
+				"Failed to cache resume metadata to Redis Server, is Redis server running?",
+				"key", cacheResumeKey,
+				"err", err,
+			)
 		}
 		c.JSON(http.StatusOK, metadata)
 	}

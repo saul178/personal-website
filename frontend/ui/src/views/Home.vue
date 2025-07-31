@@ -72,8 +72,9 @@ onMounted(() => {
               <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full group-hover:animate-ping"></span>
               <span class="absolute -left-8 top-1 w-4 h-4 bg-accent/20 rounded-full"></span>
               <h3 class="text-xl font-semibold dark:text-primary text-shadow-sm">{{ school.degree }}</h3>
-              <p class="text-sm dark:text-secondary/90 text-shadow-sm">{{ school.school }} ({{ school.date_completed
-              }})</p>
+              <p class="text-sm dark:text-secondary/90 text-shadow-sm">
+                {{ school.school }} ({{ school.date_completed }})
+              </p>
             </div>
           </div>
         </div>
