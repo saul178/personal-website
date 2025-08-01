@@ -14,6 +14,7 @@ export const useResumeStore = defineStore("resume", {
     pdfBlobUrl: null,
     error: null,
   }),
+
   getters: {
     getEducation(state) {
       return state.education
@@ -23,6 +24,7 @@ export const useResumeStore = defineStore("resume", {
       return state.skills
     }
   },
+
   actions: {
     async fetchResumeData() {
       try {
@@ -40,8 +42,8 @@ export const useResumeStore = defineStore("resume", {
       try {
         const resp = await axiousInstance.get("/download-resume", {
           responseType: 'blob',
-
         })
+
         const blob = new Blob([resp.data], { type: 'application/pdf' })
 
         // NOTE: supposedly this helps prevent memory leaks when dealing with blobs
@@ -50,9 +52,9 @@ export const useResumeStore = defineStore("resume", {
         if (this.pdfBlobUrl) {
           URL.revokeObjectURL(this.pdfBlobUrl)
         }
-
         this.pdfBlobUrl = URL.createObjectURL(blob)
-      } catch (error) {
+      }
+      catch (error) {
         console.warn("pdf fetch failed, possible issues with backend: ", error)
         this.error = error
       }
