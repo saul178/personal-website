@@ -58,6 +58,8 @@ func getRepoLanguages(ctx context.Context, s *GithubService, owner string, repos
 	return languages, nil
 }
 
+// TODO: this can be done better using channels and correctly returning an error if encountered
+// and instead of passing by value we should pass by reference since we are mutating some data
 func (s *GithubService) GetPinnedRepos(ctx context.Context) ([]RepoMetadata, error) {
 	owner := GithubUser
 	repos := getPinnedRepos()
