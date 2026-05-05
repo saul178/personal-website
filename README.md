@@ -20,7 +20,7 @@ Website is currently down as I am in the process of moving it to a different hos
 
 ## Overview
 
-The website is built with a modern full stack architecture. The frontend is developed using Vue.js and TailwindCSS, while the backend is implemented in Golang using the Gin web framework.
+The website is built with a modern full stack architecture. The frontend is developed using Vue.js and TailwindCSS, while the backend is implemented in Golang using the Gin web framework and Redis for caching.
 
 The application is containerized with Docker and deployed on a bare metal server managed through Proxmox. Traffic is routed through Nginx Proxy Manager, and the domain is managed through Cloudflare.
 
@@ -36,10 +36,12 @@ The application is containerized with Docker and deployed on a bare metal server
 
 ### Infrastructure
 - Docker
+- Nginx
+- Redis
 - Nginx Proxy Manager
 - Proxmox
 - Cloudflare
 
 ## Deployment
 
-The frontend and backend services are containerized using Docker and orchestrated with Docker Compose. The application is hosted on a self-managed bare metal server running Proxmox. Nginx Proxy Manager handles reverse proxying and SSL management, while Cloudflare manages DNS and external traffic routing.
+The frontend and backend services are containerized using Docker and orchestrated with Docker Compose. The application is hosted on a self managed bare metal server running Proxmox. Nginx Proxy Manager handles reverse proxying and SSL management, while Cloudflare manages DNS and external traffic routing.
