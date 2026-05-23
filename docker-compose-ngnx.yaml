@@ -1,0 +1,25 @@
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    deploy:
+      mode: global
+    ports:
+      - target: 80
+        published: 3330
+        mode: host
+      - target: 443
+        published: 3331
+        mode: host
+      - target: 81
+        published: 3332
+        mode: host
+
+    environment:
+
+      # Uncomment this if IPv6 is not enabled on your host
+      DISABLE_IPV6: 'true'
+
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt

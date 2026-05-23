@@ -14,10 +14,10 @@ services:
       dockerfile: Dockerfile
     container_name: backend
     restart: always
-    # env_file:
-    #   - ./backend/.env.dev
     env_file:
-      - ./backend/.env.prod
+      - ./backend/.env.dev
+    # env_file:
+    #   - ./backend/.env.prod
     depends_on:
       - redis
     ports:
