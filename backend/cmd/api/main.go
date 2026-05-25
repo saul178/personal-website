@@ -31,5 +31,5 @@ func main() {
 	}
 	routes := server.NewServer(cfg)
 	server.SetupRoutes(routes, cfg)
-	routes.Run()
+	routes.Run(":6069")
 }

@@ -25,7 +25,7 @@ COPY --from=builder /app/server .
 COPY --from=builder /app/internal/assets /app/internal/assets
 COPY --from=builder /app/internal/metadata /app/internal/metadata
 
-EXPOSE 8080
+EXPOSE 6069
 
 # Switch to non-root user and give permission to app
 RUN chown -R appuser:appuser /app

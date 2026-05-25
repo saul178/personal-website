@@ -8,9 +8,9 @@ COPY . .
 RUN npm run build
 
 # production stage
-FROM nginx:stable-alpine AS production-stage
+FROM docker.io/library/nginx:alpine AS production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
-# COPY nginx-prod.conf /etc/nginx/nginx.conf
-COPY nginx-dev.conf /etc/nginx/nginx.conf
-EXPOSE 3000
+COPY nginx-prod.conf /etc/nginx/nginx.conf
+# COPY nginx-dev.conf /etc/nginx/nginx.conf
+EXPOSE 6070
 CMD ["nginx", "-g", "daemon off;"]

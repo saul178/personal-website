@@ -21,7 +21,7 @@ services:
     depends_on:
       - redis
     ports:
-      - 8080:8080
+      - 6069:6069
     networks:
       - app-network
 
@@ -34,7 +34,7 @@ services:
       - backend
     restart: always
     ports:
-      - 8081:3000
+      - 6070:6070
     networks:
       - app-network
 volumes:
