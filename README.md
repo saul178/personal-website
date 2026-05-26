@@ -1,6 +1,7 @@
 # Personal Website Repo
 
 # TODO
+- [x] migrate from Docker to Podman
 - [x] update this readme
 - [x] begin the Home page
 - [x] begin the Projects page
