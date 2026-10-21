@@ -1,4 +1,5 @@
 # Personal Website Repo
+![image](./frontend/ui/src/assets/images/repo-imgs/personal-website.png)
 
 # TODO
 - [x] update this readme
